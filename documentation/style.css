@@ -111,6 +111,12 @@ img {
   }
 }
 
+.img-ss-medium {
+  max-height: 140vh;
+  transform-origin: top left;
+  border: 1px solid #EBEBEB;
+}
+
 .img-bg {
   padding: 10px;
   background-color: #EBEBEB;

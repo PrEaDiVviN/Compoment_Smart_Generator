@@ -25,7 +25,7 @@
                 <li><span>2.2 </span><a href="#backend">Backend</a></li>
             </ol>
         </li>
-        <li><span>3. </span><a href="#data-principles">Ontology</a></li>
+        <li><span>3. </span><a href="#ontology">Ontology</a></li>
         <li><span>4. </span><a href="#linked-data-principles">Linked data principles</a></li>
     </ol>
 
@@ -116,7 +116,7 @@
                 The frontend side of the project is made using the 
                 <span typeof="schema:WebSite" resource="https://reactjs.org/">
                     <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:name" content="reactjs">
                         <meta property="schema:url" content="https://reactjs.org/">
                     </span>
                     <a href="https://reactjs.org/"><span property="schema:name">React</span></a>
@@ -130,48 +130,155 @@
                 </span>
                 request to the API server and a link will become available to lead the user to the newly generated interface template.
                 <br>
-                On the <span class="mono">/generateTemplate/:uuid</span> path, the shown page will contain the generated interface with the specified components and the 
+
+                <img class="img-ss-smaller" src="architecture documentation/ui-sketches/MainPagePreview.png" alt="Main page preview">
+                
+                <br>
+                On the <span class="mono">/:uuid</span> path, the shown page will contain the generated interface with the specified components and the 
                 required inputs for the user to finish setting the displayed information.
+                <br>
+                As an example, for the following description, there will be displayed a page like in the image below.
+                <br><br>
+                <span class="mono">'Build a section with 2 images and 1 paragraph placed above'</span>
+                <br><br>
+                <img class="img-ss-smaller" src="architecture documentation/ui-sketches/TemplatePageExample.png" alt="Template page example preview">
+                <br><br>
+                <i>* As a node, the positional property of the components will consider the previous component only.</i>
+                <br>
+                Once the template is shown, the user will be able to edit the components data by clicking on the edit button from the corner of the element.
+                <br>
+                <img class="img-ss-smaller" src="architecture documentation/ui-sketches/TemplatePageEdit.png" alt="Template page example edit preview">
             </p>
         </section>
-
-        <span class="mono">
-            ##################################################################################################################################################################
-        </span><br>
-        <span class="mono">
-            ##################################################################################################################################################################
-        </span><br>
-        <span class="mono">to be continued</span><br>
-        <span class="mono">
-            ##################################################################################################################################################################
-        </span><br>
-        <span class="mono">
-            ##################################################################################################################################################################
-        </span><br>
-
 
         <section id="backend">
             <h3><span>2.2 </span>Backend</h3>
 
             <p>
-                Acest tabel conține datele de conectare ale administratorilor. Acesta, împreună cu un tabel de tokenuri ajută la menținerea sesiunii
-                unui administrator.
-            </p>
+                The backend side will be made using 
+                <span typeof="schema:WebSite" resource="https://nodejs.org/en/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="nodejs">
+                        <meta property="schema:url" content="https://nodejs.org/en/">
+                    </span>
+                    <a href="https://nodejs.org/en/"><span property="schema:name">nodejs</span></a>
+                </span>
+                language with 
+                <span typeof="schema:WebSite" resource="https://expressjs.com/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="express">
+                        <meta property="schema:url" content="https://expressjs.com/">
+                    </span>
+                    <a href="https://expressjs.com/"><span property="schema:name">express</span></a>
+                </span>
+                library and will provide two API routes:
+                <ul>
+                    <li>
+                        <span class="mono">/generateTemplate</span> - a POST endpoint which will accept a text description that defines the componnets and their properties 
+                        for the interface
+                    </li>
+                    <li>
+                        <span class="mono">/generated/:uuid</span> - a GET endpoint which will return the generated components for the template page
+                    </li>
+                </ul>
+                <p>
+                    The API specifications can be found on 
+                    <span typeof="schema:WebSite" resource="https://app.swaggerhub.com/home">
+                        <span property="schema:copyrightHolder" typeof="WebSite">
+                            <meta property="schema:name" content="swagger">
+                            <meta property="schema:url" content="https://app.swaggerhub.com/home">
+                        </span>
+                        <a href="https://app.swaggerhub.com/home"><span property="schema:name">swagger</span></a>
+                    </span>
+                    accessed <a href="https://app.swaggerhub.com/apis-docs/alexandru.hutu1/LanguageWebsiteModelator/1.0#/">here</a>.
+                </p>
+                <br>
 
-            <img class="img-ss-smaller" src="AdministratorsTable.png" alt="Screenshot of information table structure">
-            <img src="ArhitecturaAplicatieiTW(1).svg" alt="Arhitectura aplicatiei">
+                <p>
+                    The parser will detect certain keywords that will represent different components, placements, colors or other important factors.
+                    <br>
+                    The components will be divided in two categories:
+                </p>
+                <ul>
+                    <li>
+                        wrappers, with keywords like: 
+                        <span class="mono">container</span>, 
+                        <span class="mono">div</span>, 
+                        <span class="mono">wrapper</span>, 
+                        <span class="mono">box</span>, 
+                        <span class="mono">header</span>, 
+                        <span class="mono">footer</span>, 
+                        <span class="mono">section</span>, 
+                        <span class="mono">table</span>
+                    </li>
+                    <li>
+                        final components, for example:
+                        <span class="mono">input</span>,
+                        <span class="mono">button</span>,
+                        <span class="mono">paragraph</span>,
+                        <span class="mono">image</span>,
+                        <span class="mono">video</span>,
+                        <span class="mono">title</span>
+                    </li>
+                </ul>
+                <p>
+                    The placements will consider the previous component as the anchor when deciding the position, and these may be: 
+                    <span class="mono">above</span>,
+                    <span class="mono">right</span>,
+                    <span class="mono">below</span>,
+                    <span class="mono">left</span>.
+                    <br>
+                    Or they will be absolute positions with keywors like: 
+                    <span class="mono">top</span>,
+                    <span class="mono">end</span>,
+                    <span class="mono">bottom</span>,
+                    <span class="mono">start</span>,
+                    <span class="mono">side</span>.
+                    <br>
+                    Or as a way of arranging the components in a wrapper:
+                    <span class="mono">row</span>, 
+                    <span class="mono">column</span>,.
+                </p>
+                <p>
+                    The colors will be available as regular words, e.g. 
+                    <span class="mono">red</span>,
+                    <span class="mono">green</span>,
+                    <span class="mono">light-blue</span>,
+                    <span class="mono">teal</span>,
+                    <span class="mono">purple</span>,
+                    etc.
+                </p>
+                <p>
+                    There're also the control keywords: <span class="mono">build</span>.
+                </p>
+
+                <img class="img-ss-medium img-bg" src="architecture documentation/diagrams/c4 diagrams/C4_level3.png" alt="Level 3 of C4 diagram">
+                
+            </p>
 
 
         </section>
 
     </section>
 
-    <section id="linked-data-principles">
-        <h2><span>5. </span>Linked data principles</h2>
+    <section id="ontology">
+        <h2><span>3. </span>Ontology</h2>
         <p>
-            .....
+            The ontology will be created as a base for the components and their properties. The previously mentioned component types will be added as classes
+            into the ontology with their specific properties and relations.
+        </p>
+
+    </section>
+
+    <section id="linked-data-principles">
+        <h2><span>4. </span>Linked data principles</h2>
+        <p>
+            Every element that will be generated will contain the metadata specific to the element from the ontology and the ontology will have references
+            for the properties to other relevant ontologies.
             <br>
-            <b>The four rules</b>
+            Further details will be added as the solution will be developed.
+            <br><br>
+            <b>The four rules:</b>
             <br>
             1. Use URIs as names for things
             <br>
@@ -181,267 +288,21 @@
             <br>
             4. Include links to other URIs. so that they can discover more things.
             <br>
-            ...
         </p>
 
     </section>
 
 
-
-
-
-
-
-
-
-
-    <section id="pages">
-        <h2><span>6. </span>Paginile aplicației Web</h2>
-
-        <section id="pages-home">
-            <h3><span>6.1 </span>Home</h3>
-            <p>
-                Pagina Home
-                <!-- <span typeof="schema:WebSite" resource="to be added hosted TODO">
-                    <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="Home Page">
-                        <meta property="schema:url" content="to be added hosted TODO">
-                    </span>
-                    <a href="to be added hoste TODO"><span property="schema:name">Home</span></a>
-                </span> -->
-                conține informații pe scurt referitoare la numărul de șomeri din România, numărul de șomeri din județul tău,
-                un buton ce duce la statisticile cu aceste informații și alt buton care duce la API.
-            </p>
-
-            <img src="Home.png" alt="Screenshot of home page" class="img-ss">
-        </section>
-
-
-        <section id="pages-statistics">
-            <h3><span>6.2 </span>Statistics</h3>
-            <p>
-                În această pagină, utilizatorul alege ce județe dorește să vizualizeze prin intermediul barei de căutare sau a hărții.
-                De asemenea, acesta poate alege între un line-graph, bar plot sau pie chart, între categoriile de date (vârsta, gen, educație
-                mediu, îndemnizare) și perioada pentru care se afișează datele.
-                <br>
-                <br>
-                Acesta poate descărca diagrama generată în format SVG, CSV sau PDF.
-            </p>
-
-            <img class="img-ss" src="Statistics.png" alt="Screenshot of statistics page">
-
-            <img class="img-ss" src="UseCase-TW(3).svg" alt="Use case diagram of statistics page">
-
-        </section>
-
-        <section id="pages-API">
-            <h3><span>6.3 </span>API</h3>
-            <p>
-                În această pagină se oferă documentația API-ul oferit de website-ul nostru.
-                <br>
-                Este prezentat formatul fișierului JSON ce trebuie trimis la server pentru a putea primi rezultatele dorite
-                și cateva exemple de cereri și răspunsuri.
-            </p>
-
-            <img src="API.png" alt="Screenshot of API page" class="img-ss">
-
-        </section>
-
-        <section id="pages-admin">
-            <h3><span>6.4 </span>Admin</h3>
-            <p>
-                În această pagină te conectezi ca administrator și ai posibilitatea de a adăugat sau șterge intrări din baza de date
-            </p>
-
-            <img src="Admin.png" alt="Screenshot of admin page" class="img-ss">
-
-        </section>
-    </section>
-
-
-
-
-    <section id="implementation">
-        <h2><span>7. </span>Detalii de implementare</h2>
-        <section id="implementation-wisps">
-            <h3><span>7.1 </span>Wisps</h3>
-            <p>
-                Fundalul paginii are o animație creată din buline care se plimbă și lasă în urmă o linie cu opacitate ce scade în timp.
-                Efectul creat dinamizează background-ul paginii.
-                Bulinele sunt de fapt o imagine care își schimbă poziția în timp și linia lăsată în urmă este un array de linii a căror opacitate scade
-                cu cât se îndepărtează mai tare de bulină.
-                <br><br>
-                Bulinele se pot "izbi" de unele elemente HTML, schimbându-și traiectoria, simulând efectul unui ricoșeu. Pentru a face acest lucru,
-                elementele de care se pot izbi au clasa "collision-box".
-
-                Coliziunile cu elementele HTML se verifică cu următoare funcție:
-            </p>
-            <pre>
-                <code class="language-javascript">
-                    function intersects(line1X1, line1Y1, line1X2, line1Y2, line2X1, line2Y1, line2X2, line2Y2) {
-                        var det, gamma, lambda;
-                        det = (line1X2 - line1X1) * (line2Y2 - line2Y1) - (line2X2 - line2X1) * (line1Y2 - line1Y1);
-                        if(det === 0) {
-                            return false;
-                        } else {
-                            lambda = ((line2Y2 - line2Y1) * (line2X2 - line1X1) + (line2X1 - line2X2) * (line2Y2 - line1Y1)) / det;
-                            gamma = ((line1Y1 - line1Y2) * (line2X2 - line1X1) + (line1X2 - line1X1) * (line2Y2 - line1Y1)) / det;
-                            return (0 &lt; lambda && lambda &lt; 1) && (0 &lt; gamma && gamma &lt; 1);
-                        }
-                    };
-                </code>
-            </pre>
-        </section>
-
-
-        <section id="implementation-search-bar">
-            <h3><span>7.2 </span>Search bar</h3>
-            <p>
-                În primul rând, pentru o utilizare ușoară a search-bar-ului, am implementat-o astfel încât să nu depindă de diacritice, litere mari/mici sau spații.
-            </p>
-            <pre>
-                <code class="language-javascript">
-                    //fac aceste transformari ca sa nu conteze daca scrii cu diacritice sau nu
-                    var normalizedCountyName = countyIdtoNameMap[id].toLowerCase();
-                    normalizedCountyName = normalizedCountyName.replace(/ș/g, 's');
-                    normalizedCountyName = normalizedCountyName.replace(/ț/g, 't');
-                    normalizedCountyName = normalizedCountyName.replace(/ă/g, 'a');
-                    normalizedCountyName = normalizedCountyName.replace(/â/g, 'a');
-                    normalizedCountyName = normalizedCountyName.replace(/î/g, 'i');
-
-                    //also, scoatem whitespace-ul
-                    var normalizedInput = searchInput.toLowerCase().trim();
-                    normalizedInput = normalizedInput.replace(/ș/g, 's');
-                    normalizedInput = normalizedInput.replace(/ț/g, 't');
-                    normalizedInput = normalizedInput.replace(/ă/g, 'a');
-                    normalizedInput = normalizedInput.replace(/â/g, 'a');
-                    normalizedInput = normalizedInput.replace(/î/g, 'i');
-                </code>
-            </pre>
-            <br>
-            <p>
-                Pentru fiecare caracter introdus în search-bar, se actualizează județele afișate.
-                Ca un județ să fie afișat, acesta trebuie să nu fie deja adăugat în lista de județe deja selectate și să înceapă cu șirul de caractere
-                din search-bar normalizat.
-            </p>
-        </section>
-
-        <section id="implementation-map">
-            <h3><span>7.3 </span>Map</h3>
-            <p>
-                Am ales să folosim un
-                <span typeof="schema:DefinedTerm" resource="https://wikipedia.org">
-                    <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="Wikipedia">
-                        <meta property="schema:url" content="https://ro.wikipedia.org/wiki/Scalable_Vector_Graphics">
-                    </span>
-                    <a href="https://ro.wikipedia.org/wiki/Scalable_Vector_Graphics"><span property="schema:name">svg</span></a>
-                </span>
-                oferit de
-                <span typeof="schema:WebSite" resource="https://www.amcharts.com/">
-                    <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="amCharts">
-                        <meta property="schema:url" content="https://www.amcharts.com/svg-maps/?map=romania">
-                    </span>
-                    <a href="https://www.amcharts.com/svg-maps/?map=romania"><span property="schema:name">amCharts</span></a>
-                </span>
-                pentru a face o hartă politică interactivă. Fiecare path din svg reprezintă un județ, care este memorat într-o listă de județe:
-                <br><br>
-                <code class="language-javascript">
-                    counties = document.getElementsByTagName('path');
-                </code>
-                <br><br>
-                Pentru fiecare element, adăugam un event listener pentru a-l face interactiv și pentru a reacționa la click-ul utilizatorului.
-            </p>
-        </section>
-
-        <section id="implementation-charts">
-            <h3><span>7.4 </span>Charts</h3>
-            <p>
-                Pentru afișarea chart-urilor am folosit librăria oferită de
-                <span typeof="schema:WebSite" resource="https://www.chartjs.org/">
-                    <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="amCharts">
-                        <meta property="schema:url" content="https://www.chartjs.org/docs/latest/">
-                    </span>
-                    <a href="https://www.chartjs.org/docs/latest/"><span property="schema:name">Charts.js</span></a>
-                </span>
-
-                . Datele diagramelor se actualizează odată cu fiecare județ selectat și pot fi afișate în 3
-                tipuri diferite(line, bar, pie);
-
-            </p>
-
-            <pre>
-                <code class="language-javascript">
-                    let chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            animation: {
-                                duration: 400
-                            },
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                </code>
-            </pre>
-        </section>
-
-    </section>
-
     <section id="references">
-        <h2><span>8. </span>Referințe</h2>
-        <!-- <p> -->
+        <h2><span>4. </span>Referințe</h2>
             <ul>
                 <li property="schema:citation" typeof="schema:WebSite" resource="https://developer.mozilla.org/en-US/">
                     <cite property="schema:name">
                         <a href="https://developer.mozilla.org/en-US/">MDN Web Docs</a>
                     </cite>
                 </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.chartjs.org/docs/latest/">
-                    <cite property="schema:name">
-                        <a href="https://www.chartjs.org/docs/latest/">Charts.js documentation</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.amcharts.com/svg-maps/?map=romania">
-                    <cite property="schema:name">
-                        <a href="https://www.amcharts.com/svg-maps/?map=romania">Map from amCharts</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.w3schools.com/">
-                    <cite property="schema:name">
-                        <a href="https://www.w3schools.com/">w3schools</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://prismjs.com/index.html">
-                    <cite property="schema:name">
-                        <a href="https://prismjs.com/index.html">Prism</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="http://iulyus01.com/">
-                    <cite property="schema:name">
-                        <a href="http://iulyus01.com/">Inspiratia pentru wisps</a>
-                    </cite>
-                </li>
             </ul>
-        <!-- </p> -->
 
-    </section>
-
-    <section id="Presenting">
-        <h2><span>9. </span>Video de prezentare</h2>
-        <iframe allowfullscreen src="https://www.youtube.com/embed/40vMUPuyUEs"></iframe>
     </section>
 
 </body>
