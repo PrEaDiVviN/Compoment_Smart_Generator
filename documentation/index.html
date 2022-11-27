@@ -7,8 +7,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="../public/prism-dark.css"> -->
-    <!-- <script src="../public/prism-dark.js"></script> -->
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="/public/unwe.ico">
 </head>
@@ -28,13 +26,13 @@
             </ol>
         </li>
         <li><span>3. </span><a href="#data-principles">Ontology</a></li>
-        <li><span>4. </span><a href="#data-principles">Data principles</a></li>
+        <li><span>4. </span><a href="#linked-data-principles">Linked data principles</a></li>
     </ol>
 
     <div class="top-info" role="contentinfo">
         <dl>
             <dt>Authors</dt>
-            <dd typeof="sa:ContributorRole" property="schema:author">
+            <dd typeof="schema:ContributorRole" property="schema:author">
                 <span typeof="schema:Person">
                     <meta property="schema:givenName" content="Alexandru">
                     <meta property="schema:additionalName" content="Dumitru">
@@ -44,7 +42,7 @@
                     </a>
                 </span>
             </dd>
-            <dd typeof="sa:ContributorRole" property="schema:author">
+            <dd typeof="schema:ContributorRole" property="schema:author">
                 <span typeof="schema:Person">
                     <meta property="schema:givenName" content="Iulian">
                     <meta property="schema:familyName" content="Vultur">
@@ -95,7 +93,10 @@
         <p>
             The ui consists of a formular for the user where they may type in the description of a Web interface by using a set of controlled language constructs 
             based on which a new page will be generated. The user will be able to access the new page by following the link provided after submitting the request.
-            <br><br><br>
+        </p>
+        <img class="img-ss-smaller img-bg" src="C4_level1.png" alt="Screenshot of information table structure">
+        <p>
+            <br>
             Examples of descriptions using language constructs:
             <ul>
                 <li>
@@ -106,19 +107,48 @@
                 </li>
             </ul>
         </p>
-            
+        
         
         <section id="frontend">
             <h3><span>2.1 </span>Frontend</h3>
 
             <p>
-                
+                The frontend side of the project is made using the 
+                <span typeof="schema:WebSite" resource="https://reactjs.org/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://reactjs.org/">
+                    </span>
+                    <a href="https://reactjs.org/"><span property="schema:name">React</span></a>
+                </span>
+                library and contains 2 pages.
+                <br>
+                On the <span class="mono">/</span> path the implementation is straightforward, as the text from the formular will be sent in a 
+                <span typeof="schema:WebAPI">
+                    <meta property="documentation" content="TODO link to the api documentation">
+                    POST
+                </span>
+                request to the API server and a link will become available to lead the user to the newly generated interface template.
+                <br>
+                On the <span class="mono">/generateTemplate/:uuid</span> path, the shown page will contain the generated interface with the specified components and the 
+                required inputs for the user to finish setting the displayed information.
             </p>
-
-            <img class="img-ss-smaller" src="InformationTable.png" alt="Screenshot of information table structure">
-
-
         </section>
+
+        <span class="mono">
+            ##################################################################################################################################################################
+        </span><br>
+        <span class="mono">
+            ##################################################################################################################################################################
+        </span><br>
+        <span class="mono">to be continued</span><br>
+        <span class="mono">
+            ##################################################################################################################################################################
+        </span><br>
+        <span class="mono">
+            ##################################################################################################################################################################
+        </span><br>
+
 
         <section id="backend">
             <h3><span>2.2 </span>Backend</h3>
@@ -129,109 +159,30 @@
             </p>
 
             <img class="img-ss-smaller" src="AdministratorsTable.png" alt="Screenshot of information table structure">
+            <img src="ArhitecturaAplicatieiTW(1).svg" alt="Arhitectura aplicatiei">
 
 
         </section>
 
     </section>
 
-    <section id="frontend">
-        <h2><span>3. </span>Frontend structure</h2>
+    <section id="linked-data-principles">
+        <h2><span>5. </span>Linked data principles</h2>
         <p>
-            În diagrama de mai jos este descrisă arhitectura aplicație noastre:
-        </p>
-
-        <img src="ArhitecturaAplicatieiTW(1).svg" alt="Arhitectura aplicatiei">
-
-        <p>
-            La nivel de client, modulele importante sunt cele de generat și de exportat diagramele.
-            La nivel de server, Query Manager este modulul ce procură statisticile cerute de către utilizatori ori prin intermediul
-            aplicației ori prin API.
-        </p>
-
-    </section>
-
-    <section id="backend">
-        <h2><span>4. </span>Backend structure</h2>
-        <p>
-            Pentru stocarea datelor am folosit o bază de date MySQL găzduită pe
-            <span typeof="schema:WebSite" resource="https://www.heroku.com/">
-                <span property="schema:copyrightHolder" typeof="WebSite">
-                    <meta property="schema:name" content="amCharts">
-                    <meta property="schema:url" content="https://www.heroku.com/">
-                </span>
-                <a href="https://www.heroku.com/"><span property="schema:name">Heroku</span></a>
-            </span>
-            , același mediu în care am făcut deploy. Am creat un singleton DatabaseManager care se ocupă de administrarea conexiunii și de executarea
-            query-urilor. Vom prezenta structura tabelelor din această bază de date.
-
+            .....
             <br>
-
-        </p>
-
-        <section id="information-table">
-            <h3><span>4.1 </span>Tabela information</h3>
-
-            <p>
-                Acest tabel conține datele ce urmează a fi afișate ca statistici sau accesate prin API. Screenshot-ul cuprinde doar o parte din tabel.
-            </p>
-
-            <img class="img-ss-smaller" src="InformationTable.png" alt="Screenshot of information table structure">
-
-
-        </section>
-
-        <section id="admin-table">
-            <h3><span>4.2 </span>Tabela administrators</h3>
-
-            <p>
-                Acest tabel conține datele de conectare ale administratorilor. Acesta, împreună cu un tabel de tokenuri ajută la menținerea sesiunii
-                unui administrator.
-            </p>
-
-            <img class="img-ss-smaller" src="AdministratorsTable.png" alt="Screenshot of information table structure">
-
-
-        </section>
-
-    </section>
-
-    <section id="data-principles">
-        <h2><span>5. </span>Data principles</h2>
-
-        <p>
-            Am creat o clasă Query care se ocupă ocupă de toate query-urile la API. Primește comanda, validează datele și apoi returnează
-            rezultatul query-ului.
+            <b>The four rules</b>
             <br>
-            Query-routes este route handler-ul ce se ocupă de uri-urile rutelor pe care ar putea să facă cerere utilizatorul.
+            1. Use URIs as names for things
+            <br>
+            2. Use HTTP URIs so that people can look up those names.
+            <br>
+            3. When someone looks up a URI, provide useful information, using the standards (RDF*, SPARQL)
+            <br>
+            4. Include links to other URIs. so that they can discover more things.
+            <br>
+            ...
         </p>
-
-        <pre>
-            <code class="language-javascript">
-                $query_routes = [
-                    [
-                        'method' => 'GET',
-                        'url' => '/api/query/:county',
-                        'handler' => 'queryDatabaseForCounty'
-                    ],
-                    [
-                        'method' => 'GET',
-                        'url' => '/api/query/:county/:year',
-                        'handler' => 'queryDatabase'
-                    ],
-                    [
-                        'method' => 'GET',
-                        'url' => '/api/query/:county/:year/:month',
-                        'handler' => 'queryDatabaseMonth'
-                    ],
-                    [
-                        'method' => 'GET',
-                        'url' => '/api/query/',
-                        'handler' => 'advancedQuery'
-                    ]
-                ];
-            </code>
-        </pre>
 
     </section>
 

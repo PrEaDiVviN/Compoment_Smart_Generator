@@ -78,6 +78,11 @@ li span {
   color: #EBEBEB;
 }
 
+.mono {
+  font-family: monospace;
+  font-weight: bold;
+}
+
 img {
   margin: 10px 40px;
 }
@@ -95,7 +100,7 @@ img {
 }
 
 .img-ss-smaller {
-  width: 50%;
+  max-height: 60vh;
   transform-origin: top left;
   border: 1px solid #EBEBEB;
 }
@@ -104,6 +109,11 @@ img {
     width: 100%;
     margin: 10px 0;
   }
+}
+
+.img-bg {
+  padding: 10px;
+  background-color: #EBEBEB;
 }
 
 iframe {
