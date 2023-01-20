@@ -1,0 +1,16 @@
+.mapContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+    padding: 2rem;
+    // border: 1px solid black;
+    z-index: 1;
+
+    .mapFilters {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+}

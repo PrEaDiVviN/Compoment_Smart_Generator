@@ -1,0 +1,29 @@
+{
+    header: {
+        height: ...,
+        elements: [
+            button: {
+                width: ...,
+                height: ...,
+                ...
+            }
+        ]
+    },
+    main: {
+        width: 60%,
+        height: 100%,
+        elements: [
+            image: {
+                width: 400px,
+                height: 200px,
+                src: '...'
+            },
+            image: {
+                src: '...'
+            },
+        ]
+    },
+    footer: {
+        
+    }
+}

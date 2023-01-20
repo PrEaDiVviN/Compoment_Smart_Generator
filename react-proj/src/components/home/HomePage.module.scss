@@ -1,0 +1,55 @@
+@use '../../styling/colors.scss' as colors;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    background-color: colors.$background;
+    
+    .header {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 5rem;
+        background-color: colors.$surface;
+        
+        span {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        p {
+            margin: .3rem 0;
+        }
+    }
+
+    .main {
+        display: flex;
+        flex-direction: row;
+        padding: 2rem 5rem;
+
+        .explanations {
+            flex-grow: 4;
+        }
+
+        .formArea {
+            flex-grow: 7;
+
+            button {
+                padding: 1rem 2rem;
+                background-color: colors.$surface;
+                border: none;
+                color: colors.$primary;
+                font-weight: bold;
+                letter-spacing: 5px;
+
+                &:hover {
+                    background-color: colors.$surfaceVariant;
+                    color: colors.$surface;
+                }
+            }
+        }
+    }
+
+
+}
