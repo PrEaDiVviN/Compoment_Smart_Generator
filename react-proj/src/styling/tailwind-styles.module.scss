@@ -1,0 +1,165 @@
+@use 'colors';
+
+.full {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.inline-flex {
+    display: inline-flex;
+    gap: 1rem;
+}
+
+.table {
+    display: grid;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+.table-row {
+    display: table-row;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.table-cell {
+    display: table-cell;
+    flex-grow: 1;
+    vertical-align: middle;
+}
+
+.bg-red {
+    background-color: colors.$RED;
+}
+.bg-black {
+    background-color: colors.$BLACK;
+}
+.bg-blue {
+    background-color: colors.$BLUE;
+}
+.bg-brown {
+    background-color: colors.$BROWN;
+}
+.bg-gray {
+    background-color: colors.$GRAY;
+}
+.bg-green {
+    background-color: colors.$GREEN;
+}
+.bg-orange {
+    background-color: colors.$ORANGE;
+}
+.bg-purple {
+    background-color: colors.$PURPLE;
+}
+.bg-white {
+    background-color: colors.$WHITE;
+}
+.bg-yellow {
+    background-color: colors.$YELLOW;
+}
+
+.arrange-horizontally {
+    display: flex;
+    flex-direction: row;
+}
+.arrange-vertically {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-type-ordered {
+    list-style-type: decimal;
+}
+.list-type-unordered {
+    list-style-type: disc;
+}
+
+.list-marker-decimal {
+    list-style-type: decimal;
+}
+.list-marker-lower-alpha {
+    list-style-type: lower-alpha;
+}
+.list-marker-upper-alpha {
+    list-style-type: upper-alpha;
+}
+.list-marker-circle {
+    list-style-type: circle;
+}
+.list-marker-disc {
+    list-style-type: disc;
+}
+.list-marker-square {
+    list-style-type: square;
+}
+
+.bd-red {
+    border-color: colors.$RED;
+}
+.bd-black {
+    border-color: colors.$BLACK;
+}
+.bd-blue {
+    border-color: colors.$BLUE;
+}
+.bd-brown {
+    border-color: colors.$BROWN;
+}
+.bd-gray {
+    border-color: colors.$GRAY;
+}
+.bd-green {
+    border-color: colors.$GREEN;
+}
+.bd-orange {
+    border-color: colors.$ORANGE;
+}
+.bd-purple {
+    border-color: colors.$PURPLE;
+}
+.bd-white {
+    border-color: colors.$WHITE;
+}
+.bd-yellow {
+    border-color: colors.$YELLOW;
+}
+
+.bd-dashed {
+    border-style: dashed;
+}
+.bd-dotted {
+    border-style: dotted;
+}
+.bd-double {
+    border-style: double;
+}
+.bd-groove {
+    border-style: groove;
+}
+.bd-solid {
+    border-style: solid;
+}
+
+.no-bd-left-bot {
+    border-left: none;
+    border-bottom: none;
+}
+
+.no-bd-top-right {
+    border-top: none;
+    border-right: none;
+}
+

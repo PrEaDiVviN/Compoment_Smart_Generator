@@ -1,17 +1,17 @@
 import { AlertComponent } from "./alert-component.model";
-import { AsideStructure } from "./aside-structure.model";
-import { FooterStructure } from "./footer-structure.model";
-import { HeaderStructure } from "./header-structure.model";
-import { ListStructure } from "./list-structure.model";
-import { MainStructure } from "./main-structure.model";
-import { NavbarStructure } from "./navbar-structure.model";
-import { SectionType } from "./section-type.enum";
-import { TableStructure } from "./table-structure.model";
+import { AsideStructure } from "./structures/aside-structure.model";
+import { FooterStructure } from "./structures/footer-structure.model";
+import { HeaderStructure } from "./structures/header-structure.model";
+import { ListStructure } from "./structures/list-structure.model";
+import { MainStructure } from "./structures/main-structure.model";
+import { NavbarStructure } from "./structures/navbar-structure.model";
+import { SectionTypeEnum } from "./enums/section-type.enum";
+import { TableStructure } from "./structures/table-structure.model";
 
 export interface PageStructure {
-    sections: SectionType[],
+    sections: SectionTypeEnum[],
     header?: HeaderStructure,
-    navBar?: NavbarStructure,
+    navbar?: NavbarStructure,
     content?: MainStructure | ListStructure | TableStructure,
     aside?: AsideStructure,
     footer?: FooterStructure,

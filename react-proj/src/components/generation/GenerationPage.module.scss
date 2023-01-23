@@ -1,16 +1,41 @@
-.mapContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 1rem;
-    padding: 2rem;
-    // border: 1px solid black;
-    z-index: 1;
+.container {
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    grid-template-rows: 6fr 3fr 36fr 3fr;
+    grid-template-areas: 
+        "header header"
+        "navbar navbar"
+        "content aside"
+        "footer footer";
+    min-height: 100vh;
 
-    .mapFilters {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
+    .chunk {
+        // padding: 1rem 2rem;
     }
+
+    .header {
+        grid-area: header;
+    }
+
+    .navbar {
+        grid-area: navbar;
+    }
+
+    .content {
+        grid-area: content;
+    }
+
+    .aside {
+        grid-area: aside;
+    }
+
+    .footer {
+        grid-area: footer;
+    }
+
+    .test {
+        list-style-type: decimal;
+    }
+
+    
 }

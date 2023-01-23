@@ -1,21 +1,23 @@
 import React, { FC, useState } from 'react';
-import * as birdsService from "../../services/birds-service";
-import { TweetModel } from "../../models/tweet.model";
+import * as generationService from "../../services/generation-service";
 // import { Card } from "@mui/material";
 import styles from './HomePage.module.scss';
-import { months } from "./constants";
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { PageStructure } from '../../models/page-structure.model';
+import { ResponseError } from '../../models/response-error.model';
 
 interface StatisticsProps { }
 
 const Statistics: FC<StatisticsProps> = () => {
     
     const navigate = useNavigate();
-    const [route, setRoute] = useState('map');
 
-    const goToGeneration = () => {
-        navigate('/generation');
-        setRoute('generation');
+    const submit = () => {
+        generationService.getGeneratedPage('test').then((generatedPage: PageStructure) => {
+            navigate('/generation');
+        }).catch((error: ResponseError) => {
+            console.log(error);
+        });
     }
 
     return (
@@ -29,7 +31,7 @@ const Statistics: FC<StatisticsProps> = () => {
                     <p>text</p>
                 </div>
                 <div className={styles.formArea}>
-                    <button onClick={ goToGeneration }>
+                    <button onClick={ submit }>
                         press me
                     </button>
                 </div>

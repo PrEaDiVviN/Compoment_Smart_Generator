@@ -1,4 +1,4 @@
-export enum SectionType {
+export enum SectionTypeEnum {
     HEADER = 'header',
     NAVBAR = 'navbar',
 

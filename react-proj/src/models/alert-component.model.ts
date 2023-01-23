@@ -1,4 +1,4 @@
 export interface AlertComponent {
-    text: TEXT,
-    delay: DELAY
+    text: string,
+    delay: number
 };
