@@ -1,4 +1,3 @@
-import tailwindStyles from '../../styling/tailwind-styles.module.scss';
 import { ListStructure } from "../../models/structures/list-structure.model";
 import { Structure } from "../../models/structures/structure.model";
 import { TableStructure } from "../../models/structures/table-structure.model";
@@ -20,10 +19,7 @@ import { VideoComponent } from '../../models/components/video-component.model';
 import { ComponentNameEnum } from '../../models/enums/component-name.enum';
 import * as componentGenerator from './component-generator';
 import { GenericComponent } from '../../models/components/generic-component.model';
-
-const style = (...names: string[]): string => {
-    return names.reduce((full, name) => `${full} ${tailwindStyles[`${name}`]}`, '');
-}
+import { style } from "./helper";
 
 export const buildStructure = (section: Structure) => {
     const bgColor = section.backgroundColor.toLowerCase();

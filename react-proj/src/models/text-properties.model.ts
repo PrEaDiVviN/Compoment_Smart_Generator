@@ -7,5 +7,5 @@ export interface TextProperties {
     fontColor: ColorEnum,
 	fontStyle: FontStyleEnum,
 	fontSize: SizeEnum,
-	fontDecotation: DecorationEnum
+	fontDecoration: DecorationEnum
 };
