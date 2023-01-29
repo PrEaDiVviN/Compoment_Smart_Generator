@@ -7,7 +7,7 @@ class QueryExecutor:
 
     def __init__(self):
         self.graph = rdflib.Graph()
-        self.graph.parse('C:\\Users\\PrEaD\\Desktop\\Wade Project\\Antology docs\\Antology7.owl', format='application/rdf+xml')
+        self.graph.parse('../antology/Antology7.owl', format='application/rdf+xml')
         self.nif = rdflib.Namespace('http://www.semanticweb.org/pread/ontologies/2022/11/InteractiveControlsAntology#')
         self.graph.bind('nif', self.nif)
 
