@@ -1,6 +1,5 @@
 from flask import Flask, request, send_file
 from moviepy.editor import VideoFileClip
-from pydub import AudioSegment
 
 from Parser.LanguageParser import LanguageParser
 
