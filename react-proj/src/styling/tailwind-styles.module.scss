@@ -393,6 +393,16 @@
     background-color: colors.$YELLOW;
 }
 
+.bd-thin {
+    border-width: 1px;
+}
+.bd-medium {
+    border-width: 2px;
+}
+.bd-thick {
+    border-width: 4px;
+}
+
 .font-color-black {
     color: black;
 }
@@ -424,6 +434,12 @@
     color: yellow;
 }
 
+
+.font-dec-regular {
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+}
 .font-dec-bold {
     font-weight: bold;
 }
@@ -489,6 +505,13 @@
     display: flex;
     flex-direction: column;
 }
+
+// .li {
+
+//     &::marker {
+//         vertical-align: middle;
+//     }
+// }
 
 .list-type-ordered {
     list-style-type: decimal;

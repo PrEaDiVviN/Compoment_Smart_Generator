@@ -9,6 +9,6 @@ export interface TableStructure {
     numberColumns: number,
     borderColor: ColorEnum, 
     borderStyle: BorderStyleEnum, 
-    borderWidth: BorderEnum, // TODO
+    borderWidth: BorderEnum,
     matrix: GenericComponent[][]
 };

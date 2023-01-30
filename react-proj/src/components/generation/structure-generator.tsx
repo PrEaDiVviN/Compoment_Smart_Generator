@@ -24,6 +24,7 @@ import { style } from "./helper";
 export const buildStructure = (section: Structure) => {
     const bgColor = section.backgroundColor.toLowerCase();
     const arrangement = section.sectionArrange ? section.sectionArrange.toLowerCase() : ArrangeTypeEnum.HORITANLTALLY;
+    // PositionEnum may be empty, in which case it'll be treated as default (RIGHT)
     return (
         <div className={style(`full`, `bg-${bgColor}`, `arrange-${arrangement}`)}>
             {
@@ -40,7 +41,7 @@ export const buildList = (section: ListStructure) => {
         <div className={style('full', 'list', `bg-${bgColor}`, `list-marker-${listMarkerType}`)}>
             {
                 section.elements.map((pair: ComponentPair) => (
-                    <li>
+                    <li className={style('li')}>
                         <div className={style('inline-flex')}>
                             {
                                 buildComponentFromPair(pair)
@@ -62,27 +63,18 @@ export const buildTable = (section: TableStructure) => {
     const borderWidth = section.borderWidth;
     return (
         <div className={style('full', `bg-${bgColor}`)}>
-            <div className={style('table', `bg-${bgColor}`, `bd-${borderColor}`, `bd-${borderStyle}`, `no-bd-top-right`)}
+            <div className={style('table', `bg-${bgColor}`, `bd-${borderColor}`, `bd-${borderStyle}`, `bd-${borderWidth}`, 'no-bd-top-right')}
                 style={{gridTemplateRows: `repeat(${linesNr}, 1fr)`, gridTemplateColumns: `repeat(${columsNr}, 1fr)`}}
             >
                 {
                     [...Array(linesNr)].map((e, i) => (
-                        // <div key={i} className={style('table-row')}>
-                            // {
-                                [...Array(columsNr)].map((e, j) => {
-                                    // const shownElement = section.matrix[i].length < j ? '' : 
-                                    // console.log('\n');
-                                    // console.log(section.matrix.length < i);
-                                    // console.log(section.matrix[i].length < j);
-                                    return <div key={j} className={style('table-cell', `bd-${borderColor}`, `bd-${borderStyle}`, `no-bd-left-bot`)}>
-                                        {
-                                            i < section.matrix.length && j < section.matrix[i].length ? buildComponentFromGeneric(section.matrix[i][j]) : <p></p>
-                                            // ''
-                                        }
-                                    </div>}
-                                )
-                            // }
-                        // </div>
+                        [...Array(columsNr)].map((e, j) => {
+                            return <div key={j} className={style('table-cell', `bd-${borderColor}`, `bd-${borderStyle}`, `bd-${borderWidth}`, `no-bd-left-bot`)}>
+                                {
+                                    i < section.matrix.length && j < section.matrix[i].length ? buildComponentFromGeneric(section.matrix[i][j]) : <p></p>
+                                }
+                            </div>}
+                        )
                     ))
                 }
             </div>
@@ -108,12 +100,19 @@ const componentPicker = (element: GenericComponent): JSX.Element => {
     );
 }
 
+// const buildComponentFromPair = (elementsChunk: ComponentPair[]) => {
 const buildComponentFromPair = (element: ComponentPair) => {
     return (
         <React.Fragment>
             {
                 [...Array(element.apparitions)].map((e, i) => componentPicker(element.element))
             }
+            {/* {
+                elementsChunk.map((pair: ComponentPair) => 
+                    [...Array(pair.apparitions)].map((e, i) => componentPicker(pair.element))
+                )
+                
+            } */}
         </React.Fragment>
     );
 }

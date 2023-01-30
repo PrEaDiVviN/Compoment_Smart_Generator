@@ -3,7 +3,7 @@ import { PositionEnum } from "../enums/position.enum";
 import { SizeEnum } from "../enums/size.enum";
 
 export interface ButtonComponent {
-    disabled: boolean,
+    disabled: boolean, // TODO
 	image: string,
 	position: PositionEnum
 	size: SizeEnum,

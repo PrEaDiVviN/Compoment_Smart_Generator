@@ -20,6 +20,7 @@ import { DecorationEnum } from '../../models/enums/decoration.enum';
 import { InputTypeEnum } from '../../models/enums/input-type.enum';
 import { SliderTypeEnum } from '../../models/enums/slider-type.enum';
 import { VideoQualityEnum } from '../../models/enums/video-quality.enum';
+import { BorderEnum } from '../../models/enums/border.enum';
 
 interface GeneratedPageProps { }
 
@@ -40,12 +41,22 @@ const GenerationPage: FC<GeneratedPageProps> = () => {
             listSize: 3,
             borderColor: ColorEnum.RED,
             borderStyle: BorderStyleEnum.SOLID,
+            borderWidth: BorderEnum.THICK,
             elements: [
                 {
                     apparitions: 3,
                     element: {
                         calendar: {
-                            size: SizeEnum.BIG,
+                            size: SizeEnum.MEDIUM,
+	                        position: PositionEnum.RIGHT
+                        }
+                    }
+                },
+                {
+                    apparitions: 5, // TODO
+                    element: {
+                        calendar: {
+                            size: SizeEnum.MEDIUM,
 	                        position: PositionEnum.RIGHT
                         }
                     }
@@ -54,8 +65,18 @@ const GenerationPage: FC<GeneratedPageProps> = () => {
                     apparitions: 2,
                     element: {
                         image: {
-	                        source: 'som source',
-                            size: SizeEnum.BIG,
+	                        source: 'https://tinypng.com/images/social/website.jpg',
+                            size: SizeEnum.MEDIUM,
+	                        position: PositionEnum.RIGHT
+                        }
+                    }
+                },
+                {
+                    apparitions: 2,
+                    element: {
+                        image: {
+	                        source: 'https://tinypng.com/images/social/website.jpg',
+                            size: SizeEnum.MEDIUM,
 	                        position: PositionEnum.RIGHT
                         }
                     }
@@ -197,7 +218,7 @@ const GenerationPage: FC<GeneratedPageProps> = () => {
                     }
                 ]
             ]
-        },
+        } as MainStructure | ListStructure | TableStructure,
     };
 
     // TODO size classes

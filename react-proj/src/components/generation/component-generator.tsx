@@ -18,6 +18,7 @@ import { AiOutlineDoubleLeft } from 'react-icons/ai';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
 import { ColorEnum } from "../../models/enums/color.enum";
 
+// TODO default image, audio, video will start with '/'
 export const buildAudio = (element: AudioComponent) => {
     return (
         <audio controls>
@@ -221,19 +222,13 @@ export const buildSlider = (element: SliderComponent) => {
     );
 }
 export const buildVideo = (element: VideoComponent) => {
-	const quality = element.quality;
-	const videoLength = element.videoLength;
+	// const quality = element.quality;
+	// const videoLength = element.videoLength;
     const size = element.size;
     return (
         <video className={style('radius', `video-${size}`)} controls loop={element.looped}>
             <source src={element.source} />
 
         </video>
-        // <video width="400" controls>
-        //     <source src="mov_bbb.mp4" type="video/mp4">
-        //     <source src="mov_bbb.ogg" type="video/ogg">
-        //     Your browser does not support HTML video.
-        // </video>
-        // <div>video div</div>
     );
 }

@@ -3,4 +3,5 @@ export enum PositionEnum {
     BELOW = 'below',
     LEFT = 'left',
     RIGHT = 'right',
+    DEFAULT = 'default',
 };

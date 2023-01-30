@@ -1,5 +1,5 @@
 export enum BorderEnum {
-    THIN = 1,
-    MEDIUM = 2,
-    THICK = 4,
+    THIN = 'thin',
+    MEDIUM = 'medium',
+    THICK = 'thick',
 };
