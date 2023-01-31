@@ -19,13 +19,14 @@ class ParseElement:
         self.elements = ["video", "user profile", "photoGallery", "link", "calendar", "audio", "heading", "paragraph",
                          "input", "button", "alert", "image", "slider"]
 
-        self.parsers = {"video": ParseVideo(), "user profile": ParseUserProfile(), "photoGallery": ParsePhotoGallery(),
+        self.parsers = {"video": ParseVideo(), "user profile": ParseUserProfile(), "photogallery": ParsePhotoGallery(),
                         "link": ParseLink(), "calendar": ParseCalendar(), "audio": ParseAudio(), "heading": ParseHeading(),
                         "paragraph": ParseParagraph(), "input": ParseInput(), "button": ParseButton(),
                         "alert": ParseAlert(), "image": ParseImage(), "slider": ParseSlider()}
 
     def parse(self, element):
         for e in self.elements:
+            e = e.lower()
             if element.find(e) != -1:
                 parsed = self.parsers[e].parse(element)
                 return {e: parsed}

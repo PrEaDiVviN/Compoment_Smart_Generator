@@ -39,15 +39,21 @@ class ParseMainSection:
                 parse_elements[i] = parse_elements[i].strip(" ")
 
             for e in parse_elements:
-                nr = ''
+                e = e.strip()
+                nr_ = ''
                 if e[0] != 'a':
+                    print(e[0])
                     while '0' <= e[0] <= '9':
-                        nr += e[0]
+                        nr_ += e[0]
                         e = e[1:]
                 else:
-                    nr = '1'
-                nr = int(nr)
+                    nr_ = '1'
+                if e[0] == 'a':
+                    nr_ = 1
+                else:
+                    nr_ = int(nr_)
 
+                print(e)
                 parsed = self.element_parser.parse(e)
                 position = ''
 
@@ -57,7 +63,7 @@ class ParseMainSection:
                         if e.find(low) != -1:
                             position = place
 
-                pair = ElementsPair(nr, parsed, position)
+                pair = ElementsPair(nr_, parsed, position)
 
                 list_elements.append(pair.to_json())
 

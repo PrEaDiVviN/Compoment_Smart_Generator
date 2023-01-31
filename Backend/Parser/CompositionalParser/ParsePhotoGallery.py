@@ -18,23 +18,27 @@ class ParsePhotoGallery:
             if element.find(s) != -1:
                 size = siz
 
-        color_part = element[:element.find("user")]
+        color_part = element[:element.find("photogallery")]
         for _color in self.prop.color:
             col = _color.lower()
             if color_part.find(col) != -1:
                 color = _color
 
-        if element.find("with") != -1 and element.find("of") != -1:
+        if element.find("with") != -1 and element.find(" of ") != -1:
             raise Exception("Photo gallery cannot have both of and with clauses at the same time")
 
-        if element.find("of") != -1:
+        if element.find(" of ") != -1:
             start = element.find("of") + len("of") + 1
             end = element.find("images") - 1
             number_images = int(element[start:end])
         elif element.find("\"") != -1:
-            list_links = element[element.find("photos") + len("photos") + 1:].split(", ")
-            list_links[len(list_links) - 1] = list_links[len(list_links) - 1].replace(".", "")
-            images = list_links
+            list_links = element[element.find("photos") + len("photos") + 1:].split("; ")
+            list_links[len(list_links) - 1] = list_links[len(list_links) - 1].strip(".")
+            new_list = []
+            for link in list_links:
+                new_list.append(link.strip('"'))
+            print(new_list)
+            images = new_list
             number_images = len(images)
 
         if number_images == '':
@@ -46,6 +50,7 @@ class ParsePhotoGallery:
 
 if __name__ == "__main__":
     p = ParsePhotoGallery()
-    print(p.parse("A small red photogallery of 15 images."))
-    print(p.parse("A big green photogalerry with photos \"C://Users/Alex/photo1.png\", \"C://Users/Alex/photo2.png\", \"C://Users/Alex/photo3.png\"."))
-    print(p.parse("A photogalerry "))
+    # print(p.parse("A small red photogallery of 15 images."))
+    # print(p.parse("A big green photogalerry with photos \"C://Users/Alex/photo1.png\", \"C://Users/Alex/photo2.png\", \"C://Users/Alex/photo3.png\"."))
+    print(p.parse("A big green photogallery with photos \"www.images.com/profile\"; \"www.images.com/profile\"; \"www.images.com/profile\""))
+    # print(p.parse("A photogalerry "))

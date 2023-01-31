@@ -12,6 +12,7 @@ from Parser.StructuralParser.ParseMainSection import ParseMainSection
 from Parser.StructuralParser.ParseNavigationBarSection import ParseNavigationBarSection
 from Parser.StructuralParser.ParseTable import ParseTable
 from collections import Counter
+import traceback
 
 
 class LanguageParser:
@@ -140,6 +141,7 @@ class LanguageParser:
                 "response": response
                }
         except Exception as e:
+            traceback.print_exc()
             message = str(e)
             if message in self.list_exceptions:
                 return ErrorResponse(message, "POSITION IS UNAVAILABLE").to_json()
@@ -152,8 +154,9 @@ if __name__ == "__main__":
     parser = LanguageParser()
 
     response = parser.parse("Build a table, a header section having an image, a navigation "
-                 "bar section with a link, a aside section having 5 images, a footer section having a red link with bold and " 
+                 "bar section with a link, a aside section having 5 images, a footer section having a red link with bold and "
                             "underlined displayed text \"go to facebook\" having arial style of 10 pixels referencing \"www.facebook.com\". an alert displaying \"welcome to our website\" after 15 seconds.")
+    # response = parser.parse("Build a gray main section having a big green photogallery with photos \"www.images.com/profile\"; \"www.images.com/profile\"; \"www.images.com/profile\"")
 
     json_object = json.dumps(response, indent=4)
     print(json_object)
