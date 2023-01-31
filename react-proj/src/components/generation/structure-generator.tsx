@@ -19,16 +19,23 @@ import { VideoComponent } from '../../models/components/video-component.model';
 import { ComponentNameEnum } from '../../models/enums/component-name.enum';
 import * as componentGenerator from './component-generator';
 import { GenericComponent } from '../../models/components/generic-component.model';
-import { style } from "./helper";
+import { repositionElementsPrimaryAxis, style } from "./helper";
 
 export const buildStructure = (section: Structure) => {
     const bgColor = section.backgroundColor.toLowerCase();
-    const arrangement = section.sectionArrange ? section.sectionArrange.toLowerCase() : ArrangeTypeEnum.HORITANLTALLY;
-    // PositionEnum may be empty, in which case it'll be treated as default (RIGHT)
+    const arrangement = section.sectionArrange || ArrangeTypeEnum.HORITANLTALLY;
+    // TODO arrangements on secondary axis (maybe)
+    repositionElementsPrimaryAxis(section.elements, arrangement);
+    // const newElementsList = repositionElementsSecondaryAxis(section.elements, arrangement);
+    let apparitionsCount = 0;
     return (
         <div className={style(`full`, `bg-${bgColor}`, `arrange-${arrangement}`)}>
             {
-                section.elements.map((pair: ComponentPair) => buildComponentFromPair(pair))
+                section.elements.map((pair: ComponentPair, i: number) => {
+                    const tempApparitionsCount = apparitionsCount;
+                    apparitionsCount += pair.apparitions;
+                    return buildComponentFromPair(pair, tempApparitionsCount);
+                })
             }
         </div>
     );
@@ -40,11 +47,11 @@ export const buildList = (section: ListStructure) => {
     return (
         <div className={style('full', 'list', `bg-${bgColor}`, `list-marker-${listMarkerType}`)}>
             {
-                section.elements.map((pair: ComponentPair) => (
-                    <li className={style('li')}>
-                        <div className={style('inline-flex')}>
+                section.elements.map((pair: ComponentPair, i: number) => (
+                    <li key={i} className={style('li')}>
+                        <div className={style('inline')}>
                             {
-                                buildComponentFromPair(pair)
+                                buildComponentFromPair(pair, 1)
                             }
                         </div>
                     </li>
@@ -61,6 +68,7 @@ export const buildTable = (section: TableStructure) => {
     const borderColor = section.borderColor.toLowerCase();
     const borderStyle = section.borderStyle.toLowerCase();
     const borderWidth = section.borderWidth;
+    console.log('sectino:', section);
     return (
         <div className={style('full', `bg-${bgColor}`)}>
             <div className={style('table', `bg-${bgColor}`, `bd-${borderColor}`, `bd-${borderStyle}`, `bd-${borderWidth}`, 'no-bd-top-right')}
@@ -71,7 +79,7 @@ export const buildTable = (section: TableStructure) => {
                         [...Array(columsNr)].map((e, j) => {
                             return <div key={j} className={style('table-cell', `bd-${borderColor}`, `bd-${borderStyle}`, `bd-${borderWidth}`, `no-bd-left-bot`)}>
                                 {
-                                    i < section.matrix.length && j < section.matrix[i].length ? buildComponentFromGeneric(section.matrix[i][j]) : <p></p>
+                                    i < section.matrix.length && j < section.matrix[i].length ? buildComponentFromGeneric(section.matrix[i][j], i * columsNr + j) : <p></p>
                                 }
                             </div>}
                         )
@@ -82,30 +90,31 @@ export const buildTable = (section: TableStructure) => {
     );
 }
 
-const componentPicker = (element: GenericComponent): JSX.Element => {
-    if(element[ComponentNameEnum.AUDIO]) return componentGenerator.buildAudio(element.audio as AudioComponent);
-    if(element[ComponentNameEnum.BUTTON]) return componentGenerator.buildButton(element.button as ButtonComponent);
-    if(element[ComponentNameEnum.CALENDAR]) return componentGenerator.buildCalendar(element.calendar as CalendarComponent);
-    if(element[ComponentNameEnum.HEADING]) return componentGenerator.buildHeading(element.heading as HeadingComponent);
-    if(element[ComponentNameEnum.IMAGE]) return componentGenerator.buildImage(element.image as ImageComponent);
-    if(element[ComponentNameEnum.INPUT]) return componentGenerator.buildInput(element.input as InputComponent);
-    if(element[ComponentNameEnum.LINK]) return componentGenerator.buildLink(element.link as LinkComponent);
-    if(element[ComponentNameEnum.PARAGRAPH]) return componentGenerator.buildParagraph(element.paragraph as ParagraphComponent);
-    if(element[ComponentNameEnum.PHOTO_GALLERY]) return componentGenerator.buildPhotoGallery(element.photoGallery as PhotoGalleryComponent);
-    if(element[ComponentNameEnum.PROFILE]) return componentGenerator.buildProfile(element.profile as ProfileComponent);
-    if(element[ComponentNameEnum.SLIDER]) return componentGenerator.buildSlider(element.slider as SliderComponent);
-    if(element[ComponentNameEnum.VIDEO]) return componentGenerator.buildVideo(element.video as VideoComponent);
+const componentPicker = (element: GenericComponent, i: number): JSX.Element => {
+    if(element[ComponentNameEnum.AUDIO]) return componentGenerator.buildAudio(element.audio as AudioComponent, i);
+    if(element[ComponentNameEnum.BUTTON]) return componentGenerator.buildButton(element.button as ButtonComponent, i);
+    if(element[ComponentNameEnum.CALENDAR]) return componentGenerator.buildCalendar(element.calendar as CalendarComponent, i);
+    if(element[ComponentNameEnum.HEADING]) return componentGenerator.buildHeading(element.heading as HeadingComponent, i);
+    if(element[ComponentNameEnum.IMAGE]) return componentGenerator.buildImage(element.image as ImageComponent, i);
+    if(element[ComponentNameEnum.INPUT]) return componentGenerator.buildInput(element.input as InputComponent, i);
+    if(element[ComponentNameEnum.LINK]) return componentGenerator.buildLink(element.link as LinkComponent, i);
+    if(element[ComponentNameEnum.PARAGRAPH]) return componentGenerator.buildParagraph(element.paragraph as ParagraphComponent, i);
+    if(element[ComponentNameEnum.PHOTO_GALLERY]) return componentGenerator.buildPhotoGallery(element.photoGallery as PhotoGalleryComponent, i);
+    if(element[ComponentNameEnum.PROFILE]) return componentGenerator.buildProfile(element.profile as ProfileComponent, i);
+    if(element[ComponentNameEnum.SLIDER]) return componentGenerator.buildSlider(element.slider as SliderComponent, i);
+    if(element[ComponentNameEnum.VIDEO]) return componentGenerator.buildVideo(element.video as VideoComponent, i);
     return (
         <p style={{color: 'red', fontWeight: 'bold'}}>### COMPONENT NOT FOUND ###</p>
     );
 }
 
 // const buildComponentFromPair = (elementsChunk: ComponentPair[]) => {
-const buildComponentFromPair = (element: ComponentPair) => {
+const buildComponentFromPair = (element: ComponentPair, apparitionsCount: number) => {
+    if(!element.element) return '';
     return (
-        <React.Fragment>
+        <React.Fragment key={apparitionsCount}>
             {
-                [...Array(element.apparitions)].map((e, i) => componentPicker(element.element))
+                [...Array(element.apparitions)].map((e, i) => componentPicker(element.element, apparitionsCount + i))
             }
             {/* {
                 elementsChunk.map((pair: ComponentPair) => 
@@ -117,11 +126,11 @@ const buildComponentFromPair = (element: ComponentPair) => {
     );
 }
 
-const buildComponentFromGeneric = (component: GenericComponent) => {
+const buildComponentFromGeneric = (component: GenericComponent, i: number) => {
     return (
         <React.Fragment>
             {
-                componentPicker(component)
+                component ? componentPicker(component, i) : ''
             }
         </React.Fragment>
     );

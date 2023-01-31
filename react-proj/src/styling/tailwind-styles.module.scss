@@ -2,7 +2,10 @@
 
 .full {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    align-content: start;
+    align-items: start;
+    gap: 20px;
     width: 100%;
     height: 100%;
     padding: 1rem 2rem;
@@ -22,6 +25,15 @@
 .inline-flex {
     display: inline-flex;
     gap: 1rem;
+}
+
+.inline {
+    display: inline;
+
+    * {
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
 }
 
 .radius {
@@ -128,6 +140,23 @@
             transition: .4s;
         }
     }
+
+    span {
+        user-select: none;
+    }
+}
+
+.button-small {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.7rem;
+}
+.button-medium {
+    padding: 1rem 1.8rem;
+    font-size: 1rem;
+}
+.button-big {
+    padding: 2.4rem 4rem;
+    font-size: 2.4rem;
 }
 
 .calendar {
@@ -135,6 +164,7 @@
     background: transparent;
     border-radius: 8px;
     border: 1px solid colors.$BLACK;
+    box-sizing: border-box;
     font-size: 1rem;
     overflow: hidden;
     outline: none;
@@ -153,8 +183,8 @@
 
 .image {
     width: 200px;
-    aspect-ratio: 1;
-    object-fit: contain;
+    height: 200px;
+    object-fit: cover;
     user-select: none;
 }
 
@@ -214,6 +244,7 @@
 
 .paragraph {
     margin: 0;
+    text-align: start;
 }
 
 .photo-gallery {
@@ -392,6 +423,9 @@
 .bg-yellow {
     background-color: colors.$YELLOW;
 }
+.bg-transparent {
+    background-color: transparent;
+}
 
 .bd-thin {
     border-width: 1px;
@@ -432,6 +466,9 @@
 }
 .font-color-yellow {
     color: yellow;
+}
+.font-color-transparent {
+    color: transparent;
 }
 
 
@@ -569,6 +606,9 @@
 .bd-yellow {
     border-color: colors.$YELLOW;
 }
+.bd-transparent {
+    border-color: transparent;
+}
 
 .bd-dashed {
     border-style: dashed;
@@ -609,8 +649,19 @@
     color: colors.$WHITE;
 }
 .button-none {
-    background-color: colors.$GRAY;
-    color: colors.$BLACK;
+    background-position: center;
+    background-size: cover;
+    border: 1px solid #000;
+    overflow: hidden;
+
+    &:hover {
+        filter: grayscale(1);
+
+        .button-overlay-1 {
+            background-color: transparent;
+            opacity: 1;
+        }
+    }
 }
 .button-reset {
     background-color: colors.$BLUE;
@@ -624,23 +675,45 @@
     background-color: colors.$GREEN;
     color: colors.$WHITE;
 }
+.button-disabled {
+    background-color: colors.$GRAY;
+    color: black;
+    pointer-events: none;
+}
 
 .cal-small {
+    height: 34px;
     font-size: .6rem;
 }
 .cal-medium {
-    // font-size: 1rem;
+    height: 60px;
+    font-size: 1rem;
 }
 .cal-big {
+    height: 80px;
+    padding: .5rem 2rem;
     font-size: 2rem;
 }
 
 .img-small {
     width: 100px;
+    height: 100px;
 }
 .img-medium {
-    // width: 200px;
+    width: 200px;
+    height: 200px;
 }
 .img-big {
     width: 600px;
+    height: 600px;
+}
+
+.audio-small {
+    width: 220px;
+}
+.audio-medium {
+    width: 300px;
+}
+.audio-big {
+    width: 500px;
 }

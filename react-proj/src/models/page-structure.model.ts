@@ -12,7 +12,9 @@ export interface PageStructure {
     sections: SectionTypeEnum[],
     header?: HeaderStructure,
     navbar?: NavbarStructure,
-    content?: MainStructure | ListStructure | TableStructure,
+    main?: MainStructure,
+    list?: ListStructure,
+    table?: TableStructure,
     aside?: AsideStructure,
     footer?: FooterStructure,
     alert?: AlertComponent

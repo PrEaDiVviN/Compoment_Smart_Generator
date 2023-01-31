@@ -13,11 +13,11 @@ const Statistics: FC<StatisticsProps> = () => {
     const navigate = useNavigate();
 
     const submit = () => {
-        generationService.getGeneratedPage('test').then((generatedPage: PageStructure) => {
-            navigate('/generation');
-        }).catch((error: ResponseError) => {
-            console.log(error);
-        });
+        // generationService.getGeneratedPage('test').then((generatedPage: PageStructure) => {
+        //     navigate('/generation');
+        // }).catch((error: ResponseError) => {
+        //     console.log(error);
+        // });
     }
 
     return (

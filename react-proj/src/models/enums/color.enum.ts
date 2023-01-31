@@ -9,4 +9,5 @@ export enum ColorEnum {
     RED = 'red',
     WHITE = 'white',
     YELLOW = 'yellow',
+    TRANSPARENT = 'transparent',
 }

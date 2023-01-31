@@ -7,7 +7,7 @@ export const style = (...names: string[]): string => {
     return names.reduce((full, name) => `${full} ${tailwindStyles[`${name}`]}`, '');
 }
 
-export const repositionElements = (elements: ComponentPair[], arrangement: ArrangeTypeEnum) => {
+export const repositionElementsPrimaryAxis = (elements: ComponentPair[], arrangement: ArrangeTypeEnum) => {
     for(let i = 0; i < elements.length; i++) {
         if(arrangement === ArrangeTypeEnum.HORITANLTALLY) {
             if(elements[i].position === PositionEnum.RIGHT) elements[i].position = PositionEnum.DEFAULT;
@@ -18,6 +18,17 @@ export const repositionElements = (elements: ComponentPair[], arrangement: Arran
             else if(i > 0 && elements[i].position === PositionEnum.ABOVE) swapElements(elements, i - 1, i);
         }
     }
+}
+
+export const repositionElementsSecondaryAxis = (elements: ComponentPair[], arrangement: ArrangeTypeEnum): ComponentPair[][] => {
+    const newElementsList: ComponentPair[][] = [];
+    let index = 0;
+
+    for(let i = 0; i < elements.length; i++) {
+        
+    }
+
+    return newElementsList;
 }
 
 const swapElements = (array: ComponentPair[], i1: number, i2: number) => {

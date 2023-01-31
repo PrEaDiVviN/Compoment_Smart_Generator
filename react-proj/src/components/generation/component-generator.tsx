@@ -11,26 +11,34 @@ import { ProfileComponent } from "../../models/components/profile-component.mode
 import { SliderComponent } from "../../models/components/slider-component.model";
 import { VideoComponent } from "../../models/components/video-component.model";
 import { InputTypeEnum } from "../../models/enums/input-type.enum";
-import { buttonTexts } from "./constants";
+import { buttonTexts } from "../../constants";
 import { style } from "./helper";
 import { FaSearch } from 'react-icons/fa';
 import { AiOutlineDoubleLeft } from 'react-icons/ai';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
 import { ColorEnum } from "../../models/enums/color.enum";
+import { ButtonTypeEnum } from "../../models/enums/button-type.enum";
 
-// TODO default image, audio, video will start with '/'
-export const buildAudio = (element: AudioComponent) => {
+export const buildAudio = (element: AudioComponent, index: number) => {
+    const size = element.size;
     return (
-        <audio controls>
-            <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg"/>
-            <source src="horse.mp3" type="audio/mpeg"/>
+        <audio className={style(`audio-${size}`)} controls key={index}>
+            <source src={element.source} />
             Your browser does not support the audio element.
         </audio>
     );
 }
-export const buildButton = (element: ButtonComponent) => {
+export const buildButton = (element: ButtonComponent, index: number) => {
+    const size = element.size;
     return (
-        <div className={style('button', `button-${element.type}`)}>
+        <div key={index}
+            className={style('button', `button-${size}`, `button-${element.disabled ? 'disabled' : element.type}`)}
+            style={
+                element.type === ButtonTypeEnum.NONE ? {
+                    backgroundImage: `url(${element.image})`
+                } : {}
+            }
+        >
             <span className={style('button-span')}>
                 { buttonTexts[element.type] }
             </span>
@@ -47,20 +55,20 @@ export const buildButton = (element: ButtonComponent) => {
         </div>
     );
 }
-export const buildCalendar = (element: CalendarComponent) => {
+export const buildCalendar = (element: CalendarComponent, index: number) => {
     const size = element.size;
     return (
-        <input type="date" className={style('calendar', `cal-${size}`)} />
+        <input key={index} type="date" className={style('calendar', `cal-${size}`)} />
     );
 }
-export const buildHeading = (element: HeadingComponent) => {
+export const buildHeading = (element: HeadingComponent, index: number) => {
     const color = element.textProperties.fontColor;
     const decoration = element.textProperties.fontDecoration;
     const size = element.textProperties.fontSize;
     const fontStyle = element.textProperties.fontStyle;
     const bgColor = element.backgroundColor;
     return (
-        <h2 className={style(`bg-${bgColor}`, 'radius', 't-pad')}>
+        <h2 key={index} className={style(`bg-${bgColor}`, 'radius', 't-pad')}>
             <span className={style(`font-color-${color}`, `font-dec-${decoration}`, `font-size-${size}`, `font-style-${fontStyle}`)}>
 
             {
@@ -70,16 +78,16 @@ export const buildHeading = (element: HeadingComponent) => {
         </h2>
     );
 }
-export const buildImage = (element: ImageComponent) => {
+export const buildImage = (element: ImageComponent, index: number) => {
     const size = element.size;
     return (
-        <img className={style('image', `img-${size}`)} src={element.source} alt='' />
+        <img key={index} className={style('image', 'radius', `img-${size}`)} src={element.source} alt='' />
     );
 }
-export const buildInput = (element: InputComponent) => {
+export const buildInput = (element: InputComponent, index: number) => {
     const isSearch = element.type === InputTypeEnum.SEARCH;
     return (
-        <label className={style('text-input-container')}>
+        <label key={index} className={style('text-input-container')}>
             <div className={style('text-input-container-wrapper')}>
                 <input type="text" className={style('text-input')} />
                 {
@@ -90,14 +98,14 @@ export const buildInput = (element: InputComponent) => {
         </label>
     );
 }
-export const buildLink = (element: LinkComponent) => {
+export const buildLink = (element: LinkComponent, index: number) => {
     const color = element.textProperties.fontColor;
     const decoration = element.textProperties.fontDecoration;
     const size = element.textProperties.fontSize;
     const fontStyle = element.textProperties.fontStyle;
     const bgColor = element.backgroundColor;
     return (
-        <div className={style(`bg-${bgColor}`, 'link', 'radius', 't-pad')}>
+        <div key={index} className={style(`bg-${bgColor}`, 'link', 'radius', 't-pad')}>
             <a href={element.reference} className={style(`font-color-${color}`, `font-dec-${decoration}`, `font-size-${size}`, `font-style-${fontStyle}`)}>
                 {
                     element.text
@@ -106,14 +114,14 @@ export const buildLink = (element: LinkComponent) => {
         </div>
     );
 }
-export const buildParagraph = (element: ParagraphComponent) => {
+export const buildParagraph = (element: ParagraphComponent, index: number) => {
     const color = element.textProperties.fontColor;
     const decoration = element.textProperties.fontDecoration;
     const size = element.textProperties.fontSize;
     const fontStyle = element.textProperties.fontStyle;
     const bgColor = element.backgroundColor;
     return (
-        <div className={style(`bg-${bgColor}`, 'radius', 't-pad')}>
+        <div key={index} className={style(`bg-${bgColor}`, 'radius', 't-pad')}>
             <p className={style('paragraph', `font-color-${color}`, `font-dec-${decoration}`, `font-size-${size}`, `font-style-${fontStyle}`)}>
                 {
                     element.text
@@ -122,7 +130,7 @@ export const buildParagraph = (element: ParagraphComponent) => {
         </div>
     );
 }
-export const buildPhotoGallery = (element: PhotoGalleryComponent) => {
+export const buildPhotoGallery = (element: PhotoGalleryComponent, index: number) => {
 	const bgColor = element.backgroundColor;
     const size = element.size;
 
@@ -180,7 +188,7 @@ export const buildPhotoGallery = (element: PhotoGalleryComponent) => {
     const disabledLeft = startIndex === 0 ? disabledClassName : '';
     const disabledRight = startIndex === element.images.length - 1 ? disabledClassName : '';
     return (
-        <div className={style('photo-gallery', `pg-${size}`, `bg-${bgColor}`)}>
+        <div key={index} className={style('photo-gallery', `pg-${size}`, `bg-${bgColor}`)}>
             <AiOutlineDoubleLeft
                 className={`${style('pg-button', 'pg-left')} ${disabledLeft}`}
                 id={leftButtonId}
@@ -197,7 +205,7 @@ export const buildPhotoGallery = (element: PhotoGalleryComponent) => {
         </div>
     );
 }
-export const buildProfile = (element: ProfileComponent) => {
+export const buildProfile = (element: ProfileComponent, index: number) => {
     const color = element.textProperties.fontColor;
     const decoration = element.textProperties.fontDecoration;
     const textSize = element.textProperties.fontSize;
@@ -205,7 +213,7 @@ export const buildProfile = (element: ProfileComponent) => {
     const bgColor = element.backgroundColor;
     const size = element.size;
     return (
-        <div className={style('profile', 'radius', `bg-${bgColor}`, `profile-${size}`)}>
+        <div key={index} className={style('profile', 'radius', `bg-${bgColor}`, `profile-${size}`)}>
             <img className={style('profile-image', `bd-${color}`)} src={element.source} alt="" />
             <span className={style(`font-color-${color}`, `font-dec-${decoration}`, `font-size-${textSize}`, `font-style-${fontStyle}`)}>
                 { element.text }
@@ -213,20 +221,20 @@ export const buildProfile = (element: ProfileComponent) => {
         </div>
     );  
 }
-export const buildSlider = (element: SliderComponent) => {
+export const buildSlider = (element: SliderComponent, index: number) => {
     const bgColor = element.backgroundColor;
     return (
-        <div className={style('flex', 'radius', 't-pad', `bg-${bgColor}`)}>
+        <div key={index} className={style('flex', 'radius', 't-pad', `bg-${bgColor}`)}>
             <input className={style('slider', bgColor === ColorEnum.BLACK ? 'filter-inverted' : '')} type="range" name="slider" />
         </div>
     );
 }
-export const buildVideo = (element: VideoComponent) => {
+export const buildVideo = (element: VideoComponent, index: number) => {
 	// const quality = element.quality;
 	// const videoLength = element.videoLength;
     const size = element.size;
     return (
-        <video className={style('radius', `video-${size}`)} controls loop={element.looped}>
+        <video key={index} className={style('radius', `video-${size}`)} controls loop={element.looped}>
             <source src={element.source} />
 
         </video>
