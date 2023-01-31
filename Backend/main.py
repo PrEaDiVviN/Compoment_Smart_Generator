@@ -20,7 +20,7 @@ def audio():
     return send_file("./large/audio.mp3", mimetype='audio/mp3')
 
 
-@app.route("/image", methods = ['GET'])
+@app.route("/image", methods=['GET'])
 def image():
     type = request.args.get('type')
     return send_file('./images/' + type + ".png", mimetype='image/png')
@@ -31,7 +31,9 @@ def parse():
     parser = LanguageParser()
 
     json = request.json
-    return parser.parse(json["message"])
+    response = parser.parse(json["message"])
+    print(response)
+    return response
 
 
 if __name__ == '__main__':

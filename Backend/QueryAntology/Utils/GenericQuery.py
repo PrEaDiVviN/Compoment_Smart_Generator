@@ -40,7 +40,7 @@ class GenericQuery:
 
         for key in keys:
             val = query_result["results"]["bindings"][index][key]["value"]
-            if not val.startswith("/"):
+            if not val.startswith("/") and not val.startswith("https"):
                 val = val.replace("-", "_").upper()
             if val.isnumeric():
                 val = int(val)
