@@ -1,0 +1,97 @@
+==============================================================DESCRIPTION=====================================================================
+This file contains only the classes with their object properties.
+Please see antology.owl file for better understanding of the antology.
+==============================================================DESCRIPTION=====================================================================
+TextualElement
+	isBold 				boolean
+	isItalic 			boolean
+	hasUnderline   		boolean
+	fontStyle 			string {"arial" , "brush script mt" , "courier new" , "garamond" , "georgia" , "tahoma" , "times new roman" , "verdana"}
+	fontColor			string {"black" , "blue" , "brown" , "gray" , "green" , "orange" , "purple" , "red" , "white" , "yellow"}
+	fontSize 			int 	>= 1
+	Text
+		hasTextString 			string 
+	Label
+		hasLabelString			string  minLength = 3, maxLength = 128
+	Username
+		hasUsernameString		string 	minLength = 3, maxLength = 16
+
+WebElement
+	backgroundColor		string {"black" , "blue" , "brown" , "gray" , "green" , "orange" , "purple" , "red" , "white" , "yellow"}
+	Alert
+		timeBeforeAlert				int 	>= 0
+		isTimedAlert				boolean
+	StructuralElement
+		List
+			OrderedList
+				hasOrdoredListStyle 	string  {"decimal" , "lower-alpha" , "lower-latin" , "upper-alpha" , "upper-latin"}
+			UnordoredList
+				hasUnordoredListStyle	string  {"circle" , "disc" , "square"}
+		Section 
+			sectionOrder			string  {"finishToStart", "startToFinish"}
+			sectionArrange			string 	{"vertically", "horizontally"}
+			ContentSection
+				AsideSection
+				MainSection
+			Footer
+				isStickyFooter		boolean
+			Header
+				isStickyHeader		boolean
+			NavigationSection
+				NavigationBarSection		
+					isStickyNavbar		boolean
+				PageContentSection 			
+		Table
+			borderColor 		string {"black" , "blue" , "brown" , "gray" , "green" , "orange" , "purple" , "red" , "white" , "yellow"}
+			borderStyle 		string {"dashed" , "dotted" , "double" , "groove" , "solid"}
+			borderWidth			string {"thin", "regular", "thich"}
+			hasNumberColumns	int 	>= 1
+			hasNumberLines 		int 	>= 1
+			tableOrder			string  {"finishToStart", "startToFinish"}
+			tableArrange		string 	{"columns", "rows"}
+	CompositionalElement
+		positionalPosition 				string  {"above", "below", "left", "right"}
+		sizeProperty 					string  {"small", "medium", "big"}
+		NonTextBasedElement
+			Video
+				videoDuration 			int 	>= 1
+				isLoopedVideo			boolean
+				hasVideoSource 			string
+				currentPlayTimeVideo	int 	>= 0
+				videoQualityPixels		int {1080 , 144 , 240 , 360 , 480 , 720}
+			UserProfile
+			Slider
+				minSlidingValue			int
+				maxSlidingValue			int
+				OpacitySlider
+				ZoomSlider
+			PhotoGallery
+			Link
+				hasReference				string
+				isPageContentReference		boolean
+			Image
+				Logo
+				Photo
+				hasImageSource				string
+			Button
+				CancelButton
+				DownloadButton
+				EditButton
+				ResetButton
+				SaveButton
+				SubmitButton
+				isDisabled					boolean
+				isImageOnButton				boolean
+				buttonImageSource			string
+			Calendar
+			Audio
+				currenPlayTimeAudio			int 	>= 1
+				hasAudioSource				string
+				isLoopedAudio				boolean
+				audioDuration				int 	>= 1
+		TextBasedElement
+			Input
+				TextInput
+				SearchInput
+			Heading
+			Paragraph

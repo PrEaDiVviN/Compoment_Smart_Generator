@@ -1,0 +1,797 @@
+==============================================================DESCRIPTION=====================================================================
+This file contains only example of json responses for most components.
+Please see antology.owl file for better understanding of the antology.
+==============================================================DESCRIPTION=====================================================================
+
+================================================================REQUEST=======================================================================
+Build a gray main section having a small audio.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "main": {
+            "backgroundColor": "gray",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "audio": {
+                            "audioLength": 60,
+                            "looped": false,
+                            "size": "SMALL",
+                            "source": "/audio?seconds=60"
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "MAIN"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a gray main sectino having a small video.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "main": {
+            "backgroundColor": "gray",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "video": {
+                            "looped": false,
+                            "quality": 720,
+                            "size": "SMALL",
+                            "source": "/video?seconds=60",
+                            "videoLength": 60
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "MAIN"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a gray main section having a medium calendar.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "main": {
+            "backgroundColor": "gray",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "calendar": {
+                            "size": "MEDIUM"
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "MAIN"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a gray main section having a small red user profile with Arial red username "alex" and image with source="www.images.com/profile".
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "main": {
+            "backgroundColor": "gray",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "user profile": {
+                            "backgroundColor": "RED",
+                            "size": "SMALL",
+                            "source": "www.images.com/profile",
+                            "text": "alex",
+                            "textProperties": {
+                                "fontColor": "RED",
+                                "fontDecoration": "BOLD",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "MAIN"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a gray main section having a big green photogallery with photos \"www.images.com/profile\"; \"www.images.com/profile\"; \"www.images.com/profile\".
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "main": {
+            "backgroundColor": "gray",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "photogallery": {
+                            "backgroundColor": "GREEN",
+                            "images": [
+                                "www.images.com/profile",
+                                "www.images.com/profile",
+                                "www.images.com/profile"
+                            ],
+                            "photoNumber": 3,
+                            "size": "BIG"
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "MAIN"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a gray main section having a cancel button. An alert displaying "welcome to our website" after 15 seconds.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "alert": {
+            "delay": 15,
+            "text": "welcome to our website"
+        },
+        "main": {
+            "backgroundColor": "gray",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "CANCEL"
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "MAIN",
+            "ALERT"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a gray main section having a purple paragraph with bold and italic red text "hello from the other side" having Arial style of 32 pixels.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "main": {
+            "backgroundColor": "gray",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "paragraph": {
+                            "backgroundColor": "PURPLE",
+                            "text": "hello from the other side",
+                            "textProperties": {
+                                "fontColor": "RED",
+                                "fontDecoration": "BOLD_ITALIC",
+                                "fontSize": 32,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "MAIN"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a yellow table of 5 lines 7 columns with a red dotted border of 5 pixels arranged start to finish by rows having a cancel button, a paragraph.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "sections": [
+            "TABLE"
+        ],
+        "table": {
+            "backgroundColor": "YELLOW",
+            "borderColor": "RED",
+            "borderStyle": "DOTTED",
+            "borderWidth": "THIN",
+            "matrix": [
+                [
+                    {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "CANCEL"
+                        }
+                    },
+                    {
+                        "paragraph": {
+                            "backgroundColor": "WHITE",
+                            "text": "HEADING",
+                            "textProperties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "REGULAR",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ]
+            ],
+            "numberColumns": 7,
+            "numberLines": 5
+        }
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a gray table with 5 images, 5 paragraphs, 5 cancel buttons by rows.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "sections": [
+            "TABLE"
+        ],
+        "table": {
+            "backgroundColor": "GRAY",
+            "borderColor": "BLACK",
+            "borderStyle": "SOLID",
+            "borderWidth": "THIN",
+            "matrix": [
+                [
+                    {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    }
+                ],
+                [
+                    {
+                        "paragraph": {
+                            "backgroundColor": "WHITE",
+                            "text": "HEADING",
+                            "textProperties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "REGULAR",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    {
+                        "paragraph": {
+                            "backgroundColor": "WHITE",
+                            "text": "HEADING",
+                            "textProperties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "REGULAR",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    {
+                        "paragraph": {
+                            "backgroundColor": "WHITE",
+                            "text": "HEADING",
+                            "textProperties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "REGULAR",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    {
+                        "paragraph": {
+                            "backgroundColor": "WHITE",
+                            "text": "HEADING",
+                            "textProperties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "REGULAR",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    {
+                        "paragraph": {
+                            "backgroundColor": "WHITE",
+                            "text": "HEADING",
+                            "textProperties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "REGULAR",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    }
+                ],
+                [
+                    {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "CANCEL"
+                        }
+                    },
+                    {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "CANCEL"
+                        }
+                    },
+                    {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "CANCEL"
+                        }
+                    },
+                    {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "CANCEL"
+                        }
+                    },
+                    {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "CANCEL"
+                        }
+                    }
+                ]
+            ],
+            "numberColumns": 5,
+            "numberLines": 3
+        }
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a green decimal ordered list of 2 images, 3 paragraphs, 4 download buttons.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "list": {
+            "backgroundColor": "RED",
+            "elements": [
+                {
+                    "apparitions": 2,
+                    "element": {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    "position": ""
+                },
+                {
+                    "apparitions": 3,
+                    "element": {
+                        "paragraph": {
+                            "backgroundColor": "WHITE",
+                            "text": "HEADING",
+                            "textProperties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "REGULAR",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    "position": ""
+                },
+                {
+                    "apparitions": 4,
+                    "element": {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "DOWNLOAD"
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listMarker": "DECIMAL",
+            "listType": "ORDORED"
+        },
+        "sections": [
+            "LIST"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a red navigation bar section with a link with displayed text \"fb\" referencing \"www.facebook.com\", a link with displayed text \"yt\" referecing \"www.youtube.com\".
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "NAVBAR": {
+            "backgroundColor": "red",
+            "elements": [
+                {
+                    "backgroundColor": "WHITE",
+                    "reference": "www.facebook.com",
+                    "text": "fb",
+                    "text_properties": {
+                        "fontColor": "BLACK",
+                        "fontDecoration": "REGULAR",
+                        "fontSize": 16,
+                        "fontStyle": "ARIAL"
+                    }
+                },
+                {
+                    "backgroundColor": "WHITE",
+                    "reference": "HTTPS://PROFS.INFO.UAIC.RO/~BUSACO/PROFILE.HTML",
+                    "text": "yt",
+                    "text_properties": {
+                        "fontColor": "BLACK",
+                        "fontDecoration": "REGULAR",
+                        "fontSize": 16,
+                        "fontStyle": "ARIAL"
+                    }
+                }
+            ],
+            "listSize": 2
+        },
+        "sections": [
+            "NAVBAR"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a vertically arranged red aside section having 5 images, 3 paragraphs.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "aside": {
+            "backgroundColor": "red",
+            "elements": [
+                {
+                    "apparitions": 5,
+                    "element": {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    "position": ""
+                },
+                {
+                    "apparitions": 3,
+                    "element": {
+                        "paragraph": {
+                            "backgroundColor": "WHITE",
+                            "text": "HEADING",
+                            "textProperties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "REGULAR",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 2,
+            "sectionArrange": "vertically"
+        },
+        "sections": [
+            "ASIDE"
+        ]
+    },
+    "status": "SUCCESS"
+}
+================================================================REQUEST=======================================================================
+Build a gray main section having a download button, 5 images, a black header section having a gray paragraph with bold white text "The quick brown fox jumps over the lazy dog".
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "header": {
+            "backgroundColor": "black",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "paragraph": {
+                            "backgroundColor": "GRAY",
+                            "text": "the quick brown fox jumps over the lazy dog",
+                            "textProperties": {
+                                "fontColor": "WHITE",
+                                "fontDecoration": "BOLD",
+                                "fontSize": 16,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "main": {
+            "backgroundColor": "gray",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "button": {
+                            "disabled": false,
+                            "image": "/image?type=button",
+                            "size": "SMALL",
+                            "type": "DOWNLOAD"
+                        }
+                    },
+                    "position": ""
+                },
+                {
+                    "apparitions": 5,
+                    "element": {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 2,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "HEADER",
+            "MAIN"
+        ]
+    },
+    "status": "SUCCESS"
+}
+
+================================================================REQUEST=======================================================================
+Build a table, a header section having an image, a navigation bar section with a link, a aside section having 5 images, a footer section having a red link with bold and underlined displayed text "go to facebook" having arial style of 10 pixels referencing "www.facebook.com". an alert displaying "welcome to our website" after 15 seconds.
+================================================================REQUEST=======================================================================
+{
+    "response": {
+        "NAVBAR": {
+            "backgroundColor": "WHITE",
+            "elements": [
+                {
+                    "backgroundColor": "WHITE",
+                    "reference": "https://profs.info.uaic.ro/~busaco/profile.html",
+                    "text": "LINK",
+                    "text_properties": {
+                        "fontColor": "BLACK",
+                        "fontDecoration": "REGULAR",
+                        "fontSize": 16,
+                        "fontStyle": "ARIAL"
+                    }
+                }
+            ],
+            "listSize": 1
+        },
+        "alert": {
+            "delay": 15,
+            "text": "welcome to our website"
+        },
+        "aside": {
+            "backgroundColor": "WHITE",
+            "elements": [
+                {
+                    "apparitions": 5,
+                    "element": {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "footer": {
+            "backgroundColor": "WHITE",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "link": {
+                            "backgroundColor": "RED",
+                            "reference": "www.facebook.com",
+                            "text": "go to facebook",
+                            "text_properties": {
+                                "fontColor": "BLACK",
+                                "fontDecoration": "BOLD_UNDERLINED",
+                                "fontSize": 10,
+                                "fontStyle": "ARIAL"
+                            }
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "header": {
+            "backgroundColor": "WHITE",
+            "elements": [
+                {
+                    "apparitions": 1,
+                    "element": {
+                        "image": {
+                            "size": "SMALL",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    "position": ""
+                }
+            ],
+            "listSize": 1,
+            "sectionArrange": "HORIZONTALLY"
+        },
+        "sections": [
+            "HEADER",
+            "TABLE",
+            "ASIDE",
+            "FOOTER",
+            "ALERT",
+            "NAVBAR"
+        ],
+        "table": {
+            "backgroundColor": "WHITE",
+            "borderColor": "BLACK",
+            "borderStyle": "SOLID",
+            "borderWidth": "THIN",
+            "matrix": [
+                [
+                    {
+                        "image": {
+                            "size": "small",
+                            "source": "/image?type=default"
+                        }
+                    },
+                    "",
+                    ""
+                ],
+                [
+                    "",
+                    "",
+                    ""
+                ]
+            ],
+            "numberColumns": 3,
+            "numberLines": 2
+        }
+    },
+    "status": "SUCCESS"
+}

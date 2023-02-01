@@ -1,0 +1,51 @@
+==============================================================DESCRIPTION=====================================================================
+This file contains only most used default values for properties. Of course, these default values may differ on some object. In this file such
+a discrepancy can be seen at fontSize, which for 2 different objects has value of 16 and 32.
+
+Please see antology.owl file for better understanding of the antology.
+==============================================================DESCRIPTION=====================================================================
+
+audioDuration = 60 secs
+backgroundColor = white
+borderColor = black
+borderStyle = solid
+borderWidth = thin
+buttonImageSource = default Image Button src
+currentPlayTimeAudio = 0
+currentPlayTimeVideo = 0
+fontColor = black
+fontSize = 16 | Paragraph
+fontSize = 32 | Heading
+fontStyle = Arial
+hasAlertMessageString = Alert
+hasAudioSource = default Audio src
+hasImageSource = default Image src
+hasLabelString = label
+hasNumberColumns = 3
+hasNumberLines = 2
+hasOrdoredListStyle = decimal
+hasUnordoredListStyle = disc
+hasReference = external default link
+hasTestString = This is a paragraph
+hasUnderline = false
+hasUsernameString = username
+hasVideoSource = external default video link
+isBold = false
+isDisabled = false
+isImageOnButton = false
+isItalic = false
+isLoopedVideo = false
+isLoopedAudio = false
+isPageContentReference = false
+isTimedAlert = false
+maxSlidingValue = 100
+minSlidingValue = 0
+placingposition = right
+sectionArrange = horizontally
+sectionOrder = startToFinish
+sizeProperty = medium
+tableArrange = rows
+tableOrder = startToFinish
+timeBeforeAlert = 0
+videoDuration = 60 secs
+qualityPixels = 720
