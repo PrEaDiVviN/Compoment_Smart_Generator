@@ -104,7 +104,6 @@ export const buildLink = (element: LinkComponent, index: number) => {
     const size = element.textProperties.fontSize;
     const fontStyle = element.textProperties.fontStyle;
     const bgColor = element.backgroundColor;
-    console.log('properties:', element.textProperties);
 
     const linkOnClick = () => {
         window.open(element.reference, '_blank');
@@ -138,7 +137,6 @@ export const buildParagraph = (element: ParagraphComponent, index: number) => {
     );
 }
 export const buildPhotoGallery = (element: PhotoGalleryComponent, index: number) => {
-    console.log('element:', element);
 	const bgColor = element.backgroundColor;
     const size = element.size;
 

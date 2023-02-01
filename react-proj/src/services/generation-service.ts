@@ -22,7 +22,6 @@ const baseUrlConcatenate = (url: string): string => {
 
 const adjustResponse = (response: any) => {
     for (var property in response) {
-        console.log('property: ', property);
         if(property === 'images') {
             for(let img of response[property]) img = baseUrlConcatenate(img);
             continue;
@@ -38,7 +37,6 @@ const adjustResponse = (response: any) => {
             continue;
         }
         if(property === 'NAVBAR') {
-            console.log(response[property]);
             const listOfLinks = response[property].elements;
             for(let link of listOfLinks) {
                 link = {
