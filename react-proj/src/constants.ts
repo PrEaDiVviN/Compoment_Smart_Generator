@@ -10,4 +10,4 @@ export const buttonTexts = {
     [ButtonTypeEnum.SUBMIT]: 'submit',
 };
 
-export const baseUrl = 'http://127.0.0.1:5000';
+export const baseUrl = 'https://focused-evening-376522.ew.r.appspot.com/';
