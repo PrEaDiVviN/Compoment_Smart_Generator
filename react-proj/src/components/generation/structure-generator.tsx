@@ -69,7 +69,6 @@ export const buildTable = (section: TableStructure) => {
     const borderColor = section.borderColor.toLowerCase();
     const borderStyle = section.borderStyle.toLowerCase();
     const borderWidth = section.borderWidth;
-    console.log('sectino:', section);
     return (
         <div className={style('full', `bg-${bgColor}`)}>
             <div className={style('table', `bg-${bgColor}`, `bd-${borderColor}`, `bd-${borderStyle}`, `bd-${borderWidth}`, 'no-bd-top-right')}

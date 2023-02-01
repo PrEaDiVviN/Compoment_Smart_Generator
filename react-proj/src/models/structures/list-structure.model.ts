@@ -9,4 +9,4 @@ export interface ListStructure {
     listMarker: ListMarkerTypeEnum,
     listSize: number,
     elements: ComponentPair[]
-};
+}

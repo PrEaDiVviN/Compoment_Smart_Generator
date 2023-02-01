@@ -1,11 +1,12 @@
-import { FC, useRef } from 'react';
+import { FC, useRef, useState } from 'react';
 import * as generationService from "../../services/generation-service";
 import styles from './HomePage.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { PageStructure } from '../../models/page-structure.model';
 import { ResponseError } from '../../models/response-error.model';
 import { generatedPageKey } from './constants';
-
+import { GeneratePageResponse } from '../../services/generation-service';
+import { ResponseStatusEnum } from '../../models/response-status.enum';
 
 interface StatisticsProps { }
 
@@ -14,14 +15,22 @@ const Statistics: FC<StatisticsProps> = () => {
     const textarenaPlaceholder = 'Build a gray main section...';
     const navigate = useNavigate();
     const textarenaRef = useRef<HTMLTextAreaElement>(null);
+    const [error, setError] = useState('');
 
     const submit = () => {
-        // const mockText = 'Build a gray main section having a medium cancel button. An alert displaying "welcome to our website" after 3000 seconds.';
-        generationService.generatePage(textarenaRef.current?.value || '').then((generatedPage: PageStructure) => {
-            localStorage.setItem(generatedPageKey, JSON.stringify(generatedPage));
-            navigate('/generation');
+        // const mockText = 'Build a gray main section having a medium cancel button. An alert displaying "welcome to our website" after 3 seconds.';
+        // TODO fontSize is in pixels 
+        generationService.generatePage(textarenaRef.current?.value || '').then((generatedPageResponse: GeneratePageResponse) => {
+            if(generatedPageResponse.status.toLowerCase() === ResponseStatusEnum.ERROR) {
+                setError((generatedPageResponse.response as any).reason || '');
+                return;
+            }
+            if(generatedPageResponse.status.toLowerCase() === ResponseStatusEnum.SUCCESS) {
+                localStorage.setItem(generatedPageKey, JSON.stringify(generatedPageResponse.response));
+                navigate('/generation');
+            }
         }).catch((error: ResponseError) => {
-            console.log(error);
+            console.log('error:', error);
         });
     }
 
@@ -43,6 +52,9 @@ const Statistics: FC<StatisticsProps> = () => {
                         <div></div>
                     </div>
                     <div className={styles.explanations}>
+                        <h3>Welcome to our UICS website.</h3>
+                        <h4>Here you will find a guide for the possible language constructs and their rules:</h4>
+
                         <p>
                         SECTION = HEADER | NAVBAR | MAIN | TABLE | LIST | ASIDE | FOOTER | ALERT
                         <br />
@@ -118,6 +130,12 @@ const Statistics: FC<StatisticsProps> = () => {
                             <div className={styles.path}></div>
                         </button>
                     </div>
+
+                    {
+                        error ? <span>
+                            { error }
+                        </span> : ''
+                    }
                 </div>
             </main>
         </div>

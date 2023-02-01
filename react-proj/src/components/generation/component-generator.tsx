@@ -68,7 +68,7 @@ export const buildHeading = (element: HeadingComponent, index: number) => {
     const fontStyle = element.textProperties.fontStyle;
     const bgColor = element.backgroundColor;
     return (
-        <h2 key={index} className={style(`bg-${bgColor}`, 'radius', 't-pad')}>
+        <h2 key={index} className={style('heading', `bg-${bgColor}`, 'radius', 't-pad')}>
             <span className={style(`font-color-${color}`, `font-dec-${decoration}`, `font-size-${size}`, `font-style-${fontStyle}`)}>
 
             {

@@ -83,8 +83,11 @@
 
         .right {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
             flex-grow: 5;
+            gap: 2rem;
 
             .formArea {
                 display: flex;
@@ -162,6 +165,10 @@
                     }
                 }
 
+            }
+
+            span {
+                color: colors.$onSurface;
             }
         }
 

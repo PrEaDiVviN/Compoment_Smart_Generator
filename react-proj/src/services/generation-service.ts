@@ -1,6 +1,16 @@
 import axios from "axios";
 import { baseUrl } from "../constants";
+import { SizeEnum } from "../models/enums/size.enum";
 import { PageStructure } from "../models/page-structure.model";
+import { ResponseStatusEnum } from "../models/response-status.enum";
+
+export interface GeneratePageResponse {
+    response: {
+        positionInText: string,
+        reason: string
+    } | PageStructure,
+    status: string
+};
 
 const baseUrlConcatenate = (url: string): string => {
     return url[0] === '/' ? baseUrl + url : url;
@@ -18,6 +28,10 @@ const adjustResponse = (response: any) => {
         }
         if(property === 'text') continue;
         if(property === 'reference') continue;
+        if(property === 'fontSize') {
+            response[property] = response[property] < 16 ? SizeEnum.SMALL : (response[property] > 28 ? SizeEnum.BIG : SizeEnum.MEDIUM);
+            continue;
+        }
 
         if (typeof response[property] === 'object') adjustResponse(response[property]);
         else if (typeof property === 'function') continue;
@@ -28,18 +42,17 @@ const adjustResponse = (response: any) => {
     
 }
 
-export async function generatePage(text: string): Promise<PageStructure> {
+export async function generatePage(text: string): Promise<GeneratePageResponse> {
     const url = `${baseUrl}/language`;
     return axios.post(url, {
         message: text
      }).then(
         response => {
-            adjustResponse(response.data.response);
-            return response.data.response;
+            if(response.data.status.toLowerCase() === ResponseStatusEnum.SUCCESS) adjustResponse(response.data);
+            return response.data;
         }
     ).catch(
         err => {
-            console.log('error happened');
             return err
         }
     );

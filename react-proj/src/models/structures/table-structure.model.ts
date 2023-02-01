@@ -11,4 +11,4 @@ export interface TableStructure {
     borderStyle: BorderStyleEnum, 
     borderWidth: BorderEnum,
     matrix: GenericComponent[][]
-};
+}
