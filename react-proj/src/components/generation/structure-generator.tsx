@@ -42,6 +42,7 @@ export const buildStructure = (section: Structure) => {
 }
 
 export const buildList = (section: ListStructure) => {
+    // TODO list arrangements
     const bgColor = section.backgroundColor.toLowerCase();
     const listMarkerType = section.listMarker
     return (

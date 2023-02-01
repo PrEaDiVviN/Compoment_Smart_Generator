@@ -1,14 +1,21 @@
 import { GenericComponent } from "../../models/components/generic-component.model";
 import { ComponentPair } from "../../models/elements-list.model";
+import { ArrangeTypeEnum } from "../../models/enums/arrange-type.enum";
+import { BorderStyleEnum } from "../../models/enums/border-style.enum";
+import { BorderEnum } from "../../models/enums/border.enum";
 import { ButtonTypeEnum } from "../../models/enums/button-type.enum";
 import { ColorEnum } from "../../models/enums/color.enum";
 import { DecorationEnum } from "../../models/enums/decoration.enum";
 import { FontStyleEnum } from "../../models/enums/font-style.enum";
 import { InputTypeEnum } from "../../models/enums/input-type.enum";
+import { ListMarkerTypeEnum } from "../../models/enums/list-marker-type.enum";
+import { ListTypeEnum } from "../../models/enums/list-type.enum";
 import { PositionEnum } from "../../models/enums/position.enum";
+import { SectionTypeEnum } from "../../models/enums/section-type.enum";
 import { SizeEnum } from "../../models/enums/size.enum";
 import { SliderTypeEnum } from "../../models/enums/slider-type.enum";
 import { VideoQualityEnum } from "../../models/enums/video-quality.enum";
+import { PageStructure } from "../../models/page-structure.model";
 
 export const mockElements: ComponentPair[] = [
     {
@@ -190,3 +197,41 @@ export const mockMatrix: GenericComponent[][] = [
         }
     ]
 ];
+
+export const generatedPage: PageStructure = {
+    sections: [SectionTypeEnum.HEADER, SectionTypeEnum.LIST],
+    header: {
+        backgroundColor: ColorEnum.RED,
+        sectionArrange: ArrangeTypeEnum.HORITANLTALLY,
+        listSize: 3,
+        elements: []
+    },
+    main: {
+        backgroundColor: ColorEnum.YELLOW,
+        sectionArrange: ArrangeTypeEnum.VERTICALLY,
+        listSize: mockElements.length,
+        elements: mockElements,
+    },
+    list: {
+        backgroundColor: ColorEnum.YELLOW,
+        listType: ListTypeEnum.ORDERED,
+        listMarker: ListMarkerTypeEnum.SQUARE,
+        listSize: mockElements.length,
+        elements: mockElements,
+    },
+    table: {
+        backgroundColor: ColorEnum.YELLOW,
+        borderColor: ColorEnum.RED,
+        borderStyle: BorderStyleEnum.SOLID,
+        borderWidth: BorderEnum.THICK,
+        numberLines: 4,
+        numberColumns: 3,
+        matrix: mockMatrix,
+    },
+    aside: {
+        backgroundColor: ColorEnum.BLACK,
+        sectionArrange: ArrangeTypeEnum.VERTICALLY,
+        listSize: 4,
+        elements: []
+    }
+};

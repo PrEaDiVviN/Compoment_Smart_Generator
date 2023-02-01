@@ -1,10 +1,3 @@
-import { ComponentPair } from "../elements-list.model";
-import { ArrangeTypeEnum } from "../enums/arrange-type.enum";
-import { ColorEnum } from "../enums/color.enum";
+import { Structure } from "./structure.model";
 
-export interface AsideStructure {
-    backgroundColor: ColorEnum,
-    sectionArrange: ArrangeTypeEnum,
-    listSize: number,
-    elements: ComponentPair[]
-};
+export interface AsideStructure extends Structure {};
