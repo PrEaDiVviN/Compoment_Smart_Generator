@@ -1,9 +1,11 @@
 from flask import Flask, request, send_file
+from flask_cors import CORS
 from moviepy.editor import VideoFileClip
 
 from Parser.LanguageParser import LanguageParser
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/video", methods = ["GET"])
