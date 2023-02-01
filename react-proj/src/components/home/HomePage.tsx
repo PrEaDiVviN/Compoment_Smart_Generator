@@ -1,11 +1,10 @@
-import React, { FC, useRef, useState } from 'react';
+import { FC, useRef } from 'react';
 import * as generationService from "../../services/generation-service";
-// import { Card } from "@mui/material";
 import styles from './HomePage.module.scss';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PageStructure } from '../../models/page-structure.model';
 import { ResponseError } from '../../models/response-error.model';
-import { IoMdSend } from 'react-icons/io';
+import { generatedPageKey } from './constants';
 
 
 interface StatisticsProps { }
@@ -13,14 +12,14 @@ interface StatisticsProps { }
 const Statistics: FC<StatisticsProps> = () => {
 
     const textarenaPlaceholder = 'Build a gray main section...';
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const textarenaRef = useRef<HTMLTextAreaElement>(null);
 
     const submit = () => {
-        console.log('inserted text:', textarenaRef.current?.value);
-        generationService.generatePage('Build a table.').then((generatedPage: PageStructure) => {
-            console.log('output:', generatedPage);
-            // navigate('/generation');
+        // const mockText = 'Build a gray main section having a medium cancel button. An alert displaying "welcome to our website" after 3000 seconds.';
+        generationService.generatePage(textarenaRef.current?.value || '').then((generatedPage: PageStructure) => {
+            localStorage.setItem(generatedPageKey, JSON.stringify(generatedPage));
+            navigate('/generation');
         }).catch((error: ResponseError) => {
             console.log(error);
         });
@@ -116,7 +115,6 @@ const Statistics: FC<StatisticsProps> = () => {
                         >
                         </textarea>
                         <button onClick={ submit }>
-                            {/* <IoMdSend className={styles.icon} /> */}
                             <div className={styles.path}></div>
                         </button>
                     </div>

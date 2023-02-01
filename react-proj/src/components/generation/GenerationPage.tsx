@@ -13,6 +13,7 @@ import { BorderEnum } from '../../models/enums/border.enum';
 import { generatePage } from '../../services/generation-service';
 import { mockElements, mockMatrix } from './mocks';
 import { AlertComponent } from '../../models/alert-component.model';
+import { generatedPageKey } from '../home/constants';
 
 interface GeneratedPageProps { }
 
@@ -25,14 +26,14 @@ const GenerationPage: FC<GeneratedPageProps> = () => {
 
     useEffect(() => {
         if(page === initialState) {
-            generatePage(
-                'Build a gray main section having a medium cancel button. An alert displaying "welcome to our website" after 3000 seconds.'
-            ).then((result: PageStructure) => {
-                console.log(result);
-                setPage(result);
+            const generatedPage = JSON.parse(localStorage.getItem(generatedPageKey) || '{}') as PageStructure;
 
-                checkAlert(result.alert);
-            })
+            if(Object.keys(generatedPage).length) {
+                console.log(generatedPage);
+                setPage(generatedPage);
+    
+                checkAlert(generatedPage.alert);
+            }
 
         }
 
@@ -43,7 +44,7 @@ const GenerationPage: FC<GeneratedPageProps> = () => {
         setTimeout(() => {
             if(!alertComponent) return;
             alert(alertComponent.text)
-        }, alertComponent.delay);
+        }, alertComponent.delay * 1000);
     }
 
 
