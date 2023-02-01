@@ -1,0 +1,130 @@
+==============================================================SECTION=====================================================================
+LANGUAGE SPECIFICATION DESCRIPTION
+==============================================================SECTION=====================================================================
+
+[] -> optional 
+list(el , ..) -> list of elements of type el
+{el} -> instance of type el 
+'it' -> denotes that it is an instance (not abstract class) 
+
+==============================================================SECTION=====================================================================
+HELPER DESCRIPTORY FUNCTIONS
+==============================================================SECTION=====================================================================
+
+size(list(el, ..)) -> function that returns the size of the list
+checkInstaceCount(x, el) -> function that verifies if each instance of type el appears maximum x times
+checkElementsApparitions(x, elements..) -> function that verifies that maximum x of the elements appear
+
+==============================================================SECTION=====================================================================
+ELEMENTS EXPLAINED IN NATURAL LANGUAGE
+==============================================================SECTION=====================================================================
+
+httpReference -> any http url
+videoReference -> any http video reference
+audioReference -> any http audio reference
+imageReference -> any image http reference
+textString -> any text stribg
+number -> the set of natural numbers
+
+==============================================================SECTION=====================================================================
+ELEMENT PROPERTIES
+==============================================================SECTION=====================================================================
+
+size = small|big|medium
+quality = 144|240|360|480|720|1080
+color = black|blue|brown|gray|green|orange|purple|red|white|yellow
+backgroundColor = black|blue|brown|gray|green|orange|purple|red|white|yellow
+font = arial|brush script mt|courier new|garamond|georgia|tahoma|times new roman|verdana
+textStyle = bold|italic|underlined|bold and italic|bold and underlined|italic and underlined
+borderStyle = dashed|dotted|double|groove|solid
+tableArrange = rows|columns
+tableOrder = finish to start|start to finish
+ordoredListStyle = decimal|lower-alpha|upper-alpha
+unordoredListStyle = circle|disc|square
+sectionArrange = vertically|horizontally
+placement = below|above|to the left|to the right, where this placement is related to the previous element if space available. If not, it is ignored.
+
+==============================================================SECTION=====================================================================
+ELEMENT TYPES
+==============================================================SECTION=====================================================================
+
+structuralElement = listElement|sectionElement|'table'
+listElement = [{ordoredListStyle}] 'ordered list'|[{unordoredListStyle}] 'unordored list'
+sectionElement = contentSection|'navigation bar section'
+contentSection = 'aside section'|'main section'|'footer'|'header'
+compositionalElement = imageType|buttonType|inputType|'slider'|'video'|'user profile'|'photoGallery'|'link'|'calendar'|'audio'|'heading'|'paragraph'
+inputType = 'search input'|'text input'
+imageType = 'photo'|'logo'|'thumbnail'
+buttonType = 'cancel button'|'download button'|'edit button'|'reset button'|'save button'|'submit button'
+
+==============================================================SECTION=====================================================================
+LANGUAGE LAYOUT STRUCTURE EXEMPLIFICATION
+==============================================================SECTION=====================================================================
+
+Language structure:
+	Build list(structuralElement, ..). [alert], where size(list(structuralElement, ..)) <= 6 and checkInstaceCount(1, structuralElement) and checkElementsApparitions(1, main section, ListElement, table)
+example: Build a main section having a download button, 5 images a header section having an image
+
+SUBSECTION = Structural language exemplification
+listComposition=list(({number}|a|an) {compositionalElement}[s] [placed {placement}], ..)
+example: a download button, 5 images placed above
+
+a [{sectionArrange} arranged] [{backgrondColor}] ({contentSection}) [having {listComposition}] 
+example: a vertically arranged red main section having 5 images, 3 paragraphs
+
+a [{backgrondColor}] navigation bar section [with list(link, ..)]
+a red navigation bar section with a link with displayed text "fb" referencing "www.facebook.com", a link with displayed text "yt" referecing "www.youtube.com"
+
+a [{backgrondColor}] {listElement} of {listComposition}.
+example: A green lower-latin ordered list of 5 images, 4 paragraphs, 10 buttons.
+
+a [{backgrondColor}] table with list({number} (compositionalElement),..) [by rows|by column]  <= not recommended
+a gray table with 5 images 5 paragraphs 5 buttons by rows
+
+a [{backgrondColor}] table of {number} lines {number} columns [with a [{color}] [{borderStyle}] border [of {number} pixels]] [arranged [{tableOrder}] by [{tableArrange}]] [having {listComposition}]
+a yellow table of 5 lines 7 columns with a red dotted border of 5 pixels arranged start to finish by rows having a button, a paragraph each
+
+==============================================================SECTION=====================================================================
+COMPOSITIONAL LANGUAGE EXEMPLIFICATION
+==============================================================SECTION=====================================================================
+
+a [{backgrondColor}] paragraph [with [{textStyle}] [{color}] text ["{textString}"]] [having {font} style] [of {number} pixels].
+example: A red paragraph with bold and italic text "hello from the other side" having arial style of 16 pixels.
+
+a [{backgrondColor}] heading [with [{textStyle}] [{color}] text ["{textString}"]] [having {font} style] [of {number} pixels].
+example: A purple heading with bold and italic red text "hello from the other side" having Arial style of 32 pixels.
+
+an alert displaying "{textString}" [after {number} seconds].
+example: An alert displaying "welcome to our website" after 15 seconds.
+
+a [{backgrondColor}] link [with [{textStyle}] [{color}] displayed text ["{textString}"]] [having {font} style] [of {number} pixels] [referencing "{httpReference}"]
+example: A red link with bold and underlined displayed text "go to facebook" having Arial style of 10 pixels referencing "www.facebook.com".
+
+a [[[{size}] [{backgrondColor}]] {inputType} [[with [{textStyle}] [{color}] input text] [having {font} style] [of {number} pixels]]
+example: A small red search input with input text of 5 pixels.
+
+a [{size}] [looped] video [of {number} minutes] [having source="{videoReference}"] [of {quality} pixels]
+example: A small looped video of 5 minutes having source="https://www.youtube.com/watch?v=bAVKp0X9JnQ&list=RD_3NxUWq3t_g&index=8" of 720 pixels.
+
+an [{size}] [looped] audio [of {number} minutes] [having source="{audioReference}"].
+example: A big looped audio of 5 minutes having source="https://www.shutterstock.com/music.mp3".
+
+a [{size}] [disabled] [{buttonType}|image button with source="{imageReference}"].
+example: A big disabled ResetButton.
+example: A small button with source="https://www.shutterstock.com/button-photo".
+
+a [{size}] {imageType} with source={imageReference}.
+example: A small image with source="https://www.shutterstock.com/image-photo".
+
+a [[{size}] [{backgrondColor}]] photogallery [[of {number} images]|[with photos "{imageReference}", "{imageReference}", ..]].
+example: A small red photogallery of 15 images.
+example: A big green photogalerry with photos "https://www.shutterstock.com/image-photo", "https://www.shutterstock.com/image-photo", "https://www.shutterstock.com/image-photo".
+
+a [{size}] {sliderType} [with minimum value of {number} and maximum value of {number}].
+example: A big opacity slider with minimum value of 15 and maximum value of 78.
+
+a [[{size}] [{backgrondColor}]] user profile [with [{textStyle}] [{color}] username ["{textString}"] and image with source="{imageReference}"] [placed {placement}].
+example: A small red user profile with Arial red username "alex" and image with source="https://www.shutterstock.com/profile".
+
+a [{size}] calender.
+example: A medium calendar.

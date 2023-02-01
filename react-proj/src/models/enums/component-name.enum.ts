@@ -7,7 +7,7 @@ export enum ComponentNameEnum {
     INPUT = 'input',
     LINK = 'link',
     PARAGRAPH = 'paragraph',
-    PHOTO_GALLERY = 'photoGallery',
+    PHOTO_GALLERY = 'photogallery',
     PROFILE = 'profile',
     SLIDER = 'slider',
     VIDEO = 'video',

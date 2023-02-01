@@ -19,7 +19,6 @@ const Statistics: FC<StatisticsProps> = () => {
 
     const submit = () => {
         // const mockText = 'Build a gray main section having a medium cancel button. An alert displaying "welcome to our website" after 3 seconds.';
-        // TODO fontSize is in pixels 
         generationService.generatePage(textarenaRef.current?.value || '').then((generatedPageResponse: GeneratePageResponse) => {
             if(generatedPageResponse.status.toLowerCase() === ResponseStatusEnum.ERROR) {
                 setError((generatedPageResponse.response as any).reason || '');
@@ -32,6 +31,15 @@ const Statistics: FC<StatisticsProps> = () => {
         }).catch((error: ResponseError) => {
             console.log('error:', error);
         });
+    }
+
+    const downloadTxtFile = () => {
+      const element = document.createElement("a");
+      const file = new Blob(['../../assets/language.txt'], {type: 'text/plain;charset=utf-8'});
+      element.href = URL.createObjectURL(file);
+      element.download = 'language.txt';
+      document.body.appendChild(element);
+      element.click();
     }
 
     return (
@@ -53,68 +61,18 @@ const Statistics: FC<StatisticsProps> = () => {
                     </div>
                     <div className={styles.explanations}>
                         <h3>Welcome to our UICS website.</h3>
+                        <br />
                         <h4>Here you will find a guide for the possible language constructs and their rules:</h4>
+                        <br />
+                        <a href="/" onClick={downloadTxtFile}>
+                            Language rules..
+                        </a>
+                        <br />
+                        <br />
 
+                        <b>Example:</b>
                         <p>
-                        SECTION = HEADER | NAVBAR | MAIN | TABLE | LIST | ASIDE | FOOTER | ALERT
-                        <br />
-                        ARRANGE = VERTICALLY | HORITANLTALLY
-                        <br />
-                        COLOR = BLACK | BLUE | BROWN | GRAY | GREEN | ORANGE | PURPLE | RED | WHITE | YELLOW
-                        <br />
-                        DECORATION = BOLD | ITALIC | UNDERLINED | BOLD_ITALIC | BOLD_UNDERLINED | ITALIC_UNDERLINED
-                        <br />
-                        FONT_STYLE = ARIAL | BRUSH_SCRIPT_MT | COURIER_NEW | GARAMOND | GEORGIA | TAHOMA | TIMES_NEW_ROMAN | VERDANA
-                        <br />
-                        POSITION = ABOVE | BELOW | LEFT | RIGHT
-                        <br />
-                        INPUT_TYPE = SEARCH | TEXT_INPUT
-                        <br />
-                        VIDEO_QUALITY = 144 | 240 | 360 | 480 | 720 | 1080
-                        <br />
-                        SIZE = SMALL | MEDIUM | BIG
-                        <br />
-                        BOOLEAN = TRUE | FALSE
-                        <br />
-                        BUTTON_TYPE = CANCEL | DOWNLOAD | EDIT | RESET | SAVE | SUBMIT | NONE
-                        <br />
-                        SLIDER_TYPE = ZOOM | OPACITY
-                        <br />
-                        BORDER_STYLE = DASHED | DOTTED | DOUBLE | GROOVE | SOLID
-                        <br />
-                        LIST_TYPE = ORDERED | UNORDORED
-                        <br />
-                        MARKER = DECIMAL | LOWER_ALPHA | LOWER_LATIN | UPPER_ALPHA | UPPER_LATIN | CIRCLE | DISC | SQUARE
-                        <br />
-                        <br />
-
-
-                        SOURCE -{'>'} Image | Video | Audio reference to where the file is found.
-                        <br />
-                        BUTTON_SOURCE -{'>'} SOURCE or empty string.
-                        <br />
-                        REFERENCE -{'>'} HTTP web reference.
-                        <br />
-                        LENGTH -{'>'} Video | Audio playtime duration in minutes.
-                        <br />
-                        TEXT -{'>'} String representing the text to be displayed.
-                        <br />
-                        FONT_SIZE -{'>'} Integer representing the size of the displayed text in pixels.
-                        <br />
-                        DELAY -{'>'} Integer representing the delay to wait before an alert appears.
-                        <br />
-                        PHOTO_NUMBER -{'>'} Number of photos that should be displayed in this photo gallery.
-                        <br />
-                        VALUE -{'>'} Integer value representing how low | high a slider can go.
-                        <br />
-                        NUMBER -{'>'} Integer value {'>'} 0 representing number of columns/rows in a table or number of elements.
-                        <br />
-                        BORDER_WIDTH -{'>'} Integer value {'>'} 0 representing the border width of a table.
-                        <br />
-                        ERROR_REASON -{'>'} Why the error occured.
-                        <br />
-                        POSITION_IN_TEXT -{'>'} Where the error occured.
-                        <br />
+                        Build a gray main section having a big green photogallery with photos "https://w.wallhaven.cc/full/7p/wallhaven-7p39gy.png"; "https://w.wallhaven.cc/full/qz/wallhaven-qzdqvr.jpg"; "https://w.wallhaven.cc/full/l8/wallhaven-l83o92.jpg".
                         </p>
                     </div>
                 </div>

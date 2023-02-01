@@ -131,6 +131,7 @@ export const buildParagraph = (element: ParagraphComponent, index: number) => {
     );
 }
 export const buildPhotoGallery = (element: PhotoGalleryComponent, index: number) => {
+    console.log('element:', element);
 	const bgColor = element.backgroundColor;
     const size = element.size;
 

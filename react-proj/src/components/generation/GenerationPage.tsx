@@ -20,6 +20,7 @@ const GenerationPage: FC<GeneratedPageProps> = () => {
             const generatedPage = JSON.parse(localStorage.getItem(generatedPageKey) || '{}') as PageStructure;
 
             if(Object.keys(generatedPage).length) {
+                console.log(generatedPage);
                 setPage(generatedPage);
     
                 checkAlert(generatedPage.alert);

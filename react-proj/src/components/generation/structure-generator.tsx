@@ -91,6 +91,7 @@ export const buildTable = (section: TableStructure) => {
 }
 
 const componentPicker = (element: GenericComponent, i: number): JSX.Element => {
+    console.log('picker element:', element)
     if(element[ComponentNameEnum.AUDIO]) return componentGenerator.buildAudio(element.audio as AudioComponent, i);
     if(element[ComponentNameEnum.BUTTON]) return componentGenerator.buildButton(element.button as ButtonComponent, i);
     if(element[ComponentNameEnum.CALENDAR]) return componentGenerator.buildCalendar(element.calendar as CalendarComponent, i);
@@ -99,7 +100,7 @@ const componentPicker = (element: GenericComponent, i: number): JSX.Element => {
     if(element[ComponentNameEnum.INPUT]) return componentGenerator.buildInput(element.input as InputComponent, i);
     if(element[ComponentNameEnum.LINK]) return componentGenerator.buildLink(element.link as LinkComponent, i);
     if(element[ComponentNameEnum.PARAGRAPH]) return componentGenerator.buildParagraph(element.paragraph as ParagraphComponent, i);
-    if(element[ComponentNameEnum.PHOTO_GALLERY]) return componentGenerator.buildPhotoGallery(element.photoGallery as PhotoGalleryComponent, i);
+    if(element[ComponentNameEnum.PHOTO_GALLERY]) return componentGenerator.buildPhotoGallery(element.photogallery as PhotoGalleryComponent, i);
     if(element[ComponentNameEnum.PROFILE]) return componentGenerator.buildProfile(element.profile as ProfileComponent, i);
     if(element[ComponentNameEnum.SLIDER]) return componentGenerator.buildSlider(element.slider as SliderComponent, i);
     if(element[ComponentNameEnum.VIDEO]) return componentGenerator.buildVideo(element.video as VideoComponent, i);
@@ -128,9 +129,9 @@ const buildComponentFromPair = (element: ComponentPair, apparitionsCount: number
 
 const buildComponentFromGeneric = (component: GenericComponent, i: number) => {
     return (
-        <React.Fragment>
+        <React.Fragment key={i}>
             {
-                component ? componentPicker(component, i) : ''
+                component ? componentPicker(component, i + 1000) : ''
             }
         </React.Fragment>
     );
