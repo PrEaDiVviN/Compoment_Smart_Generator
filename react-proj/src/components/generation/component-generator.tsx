@@ -104,8 +104,15 @@ export const buildLink = (element: LinkComponent, index: number) => {
     const size = element.textProperties.fontSize;
     const fontStyle = element.textProperties.fontStyle;
     const bgColor = element.backgroundColor;
+    console.log('properties:', element.textProperties);
+
+    const linkOnClick = () => {
+        window.open(element.reference, '_blank');
+
+    }
+
     return (
-        <div key={index} className={style(`bg-${bgColor}`, 'link', 'radius', 't-pad')}>
+        <div onClick={linkOnClick} key={index} className={style(`bg-${bgColor}`, 'link', 'radius', 't-pad')}>
             <a href={element.reference} className={style(`font-color-${color}`, `font-dec-${decoration}`, `font-size-${size}`, `font-style-${fontStyle}`)}>
                 {
                     element.text

@@ -101,7 +101,7 @@ const componentPicker = (element: GenericComponent, i: number): JSX.Element => {
     if(element[ComponentNameEnum.LINK]) return componentGenerator.buildLink(element.link as LinkComponent, i);
     if(element[ComponentNameEnum.PARAGRAPH]) return componentGenerator.buildParagraph(element.paragraph as ParagraphComponent, i);
     if(element[ComponentNameEnum.PHOTO_GALLERY]) return componentGenerator.buildPhotoGallery(element.photogallery as PhotoGalleryComponent, i);
-    if(element[ComponentNameEnum.PROFILE]) return componentGenerator.buildProfile(element.profile as ProfileComponent, i);
+    if(element[ComponentNameEnum.PROFILE]) return componentGenerator.buildProfile(element['user profile'] as ProfileComponent, i);
     if(element[ComponentNameEnum.SLIDER]) return componentGenerator.buildSlider(element.slider as SliderComponent, i);
     if(element[ComponentNameEnum.VIDEO]) return componentGenerator.buildVideo(element.video as VideoComponent, i);
     return (

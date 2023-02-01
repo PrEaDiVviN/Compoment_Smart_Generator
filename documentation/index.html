@@ -17,6 +17,21 @@
     </header>
 
     <ol>
+        <li>
+            <span>1. </span><a href="#project-progress">Project progress</a>
+            <ol>
+                <li><span>1.1 </span><a href="#frontend">Frontend</a></li>
+                <li><span>1.2 </span><a href="#backend">Backend</a></li>
+            </ol>
+        </li>
+        <li><span>2. </span><a href="#implemented-api">Implemented API</a></li>
+        <li><span>3. </span><a href="#rdf-model">RDF based knowledge model - Ontology</a></li>
+        <li><span>4. </span><a href="#external-data">Use of external data</a></li>
+        <li><span>5. </span><a href="#external-data">User guide</a></li>
+    </ol>
+
+    <br>
+    <ol>
         <li><span>1. </span><a href="#introduction">Introduction</a></li>
         <li>
             <span>2. </span><a href="#application-architecture">Application architecture</a>
@@ -57,6 +72,669 @@
             </dd>
         </dl>
     </div>
+
+    <section id="project-progress">
+        <h2><span>1. </span>Project progress</h2>
+
+        <p>
+            <b>Initial goals</b>
+            <br><br>
+            Initially the project was to be realized as a browser application containing 2 pages, one where the user will learn about the language 
+            and possible language constructs and where they will be able to introduce the desired text to get the page design. And the other page, 
+            where the user will see the constructed page based on their inserted text and will be able to modify and or add specific content for 
+            the components.
+        </p>
+
+        <p>
+            <b>Requirements</b>
+            <br><br>
+            // TODO
+        </p>
+
+        <section id="frontend">
+            <h3><span>2.1 </span>Frontend</h3>
+
+            <p>
+                The UI side of the application was made using ###React library along with different libraries e.g. ###axios, ###router-dom, and 
+                technologies like ###sass and ###typescript. <br>
+                The development started with the main pages of the application
+                <ul>
+                    <li>the home page on the <span class="mono">/</span> (home) path</li>
+                    <li>the generation page on the <span class="mono">/generation</span> path</li>
+                </ul>
+            </p>
+            <p>
+                The home page contains the information for the language and examples of possible constructs used for the page generation and an
+                input for said constructs which, when submited will be validated and will take the user to the generated design.
+            </p>
+            <p>
+                And for the generation page, once the page is loaded, all the elements specified in the previous input will be generated, styled and 
+                positioned in the manner described by the user.
+            </p>
+
+            <img class="img-ss" src="architecture documentation\diagrams\FE_class_diagram.drawio.png" alt="FE class and concept diagram">
+            
+            <p>
+                The above image shows the frontend class and concept diagram of the application. At the root level there's the App that manages the routes 
+                of the app, then there's the HomePage with the specified elements and the submit listener for the input where, once triggered will capture 
+                the user typed text and will send it to the <span class="mono">generatePage</span> method from the <span class="mono">GenerationService</span>.
+                It will then make a post request with the text to the API server.
+                <br>
+                Once a response is received, it will then check the status, if it's an error it will show the cause below the input for the user to see, 
+                otherwise it will be adjusted to match the structures and interfaces. The adjustment consists of mapping the values of the element's 
+                properties to the values of the existing enums and also modifying the default source of assets for image background, audio and video by 
+                setting a default url for each category.
+                <br>
+                <img class="img-ss-small" src="architecture documentation\images\PageStructure.png" alt="Received adjusted page structure">
+                <br>
+                The adjusted response will be a PageStructure containing the sections to be shown. The main, list and table sections will represent the 
+                main content of the page, only one of them being present in a response. The ratio of the elements vertically will be 12 / 6 / 76 / 6 and
+                horizontally it will be 70 / 30.
+                <br>
+                <img class="img-ss-small" src="architecture documentation\images\Structure.png" alt="Structure">
+                <img class="img-ss-small" src="architecture documentation\images\ListStructure.png" alt="List structure">
+                <img class="img-ss-small" src="architecture documentation\images\TableStructure.png" alt="Table structure">
+                <br>
+                Each section will either extend a basic Structure or a specific structure for list (ListStructure) or table (TableStructure), containing 
+                some styling properties and a list of elements to be shown.
+                <br>
+                The list of elements is iterated and for every item it will generates a specific component with the styling and properties described in 
+                the element. The components can be either of:
+            </p>
+            <ul>
+                <li>Audio</li>
+                <li>Button</li>
+                <li>Calendar</li>
+                <li>Heading</li>
+                <li>Image</li>
+                <li>Input</li>
+                <li>Link</li>
+                <li>Paragraph</li>
+                <li>PhotoGallery</li>
+                <li>Profile</li>
+                <li>Slider</li>
+                <li>Video</li>
+            </ul>
+            <p>
+                Each component can be customized by some parameters which will be taken into consideration when generating the html and the styling.
+                <br>
+                The styling is made by adapting the ###tailwind css model along with standard style classes to dinamically set the appearance of the 
+                components using the object properties.
+            </p>
+            <img class="img-ss" src="architecture documentation\images\pageLayout.png" alt="Page layout">
+            <p>
+                The layout of the generated page is partitioned as shown in the above image, the navbar and the footer having the smaller ratio of 6%.
+                In case the elements to be displayed do not fit into the container, then the main section will be extended vertically, with the minimum 
+                height of 76% of the screen.
+                <br>
+
+            </p>
+        </section>
+
+        <section id="backend">
+            <h3><span>2.2 </span>Backend</h3>
+
+            <p>
+                <b>Description</b>
+                <br>
+
+                The main functionality provided by backend is parsing the natural language text to json representation of 
+                <a href="#JsonResponseSchema">JsonResponseSchema</a> 
+                so that the frontend will be able to easily convert that response to UI functionality. This conversions is based both on used properties added to 
+                objects and also default values if none were supplied. The default values were obtained from the <a href="#Ontology">Ontology</a> instances. Other functionality
+                provided by backend is sending default videos, audios and images.
+            </p>
+
+            <p>
+                <b>Default API functionality</b>
+                <br>
+                One of the routes is /audio which has an query argument seconds. By using the values of this query argument we will be able to obtain an 
+                mp3 audio file between 1 and 168 seconds. Another route is /video which is very similar to audio, because it has the same query parameter
+                seconds and returns a video having the length of the specified argument and the file type is mp4. Last one is /image which has an query
+                argument type which can take three values [default, profile, button] which of course are returned when the user does not provide these 
+                values of images.
+            </p>
+
+            <p>
+                <b>Used libraries for main functionality</b>
+                <br>
+                The backend API was all written in ###Python. Between the external libraries used we have ###Flask, ###Moviepy and ###rdflib. Flask was 
+                used for providing the routes and return data because it can be used easily and has great extensibility. The routher provided by flask 
+                are /audio, /video, /image, /language. MoviePy was used to crop the video file to the specified length. No other usage in the project.
+                <br>
+                Rdflib was used for querying instances from the database in case when calling /language route, objects did not have all properties set.
+                So, default entities were created and from them these values will be selected.
+            </p>
+
+            <p>
+                <b>Explain route /language</b>
+                <br>
+                As explained already above, this route will translate the text natural language constructed using the <a href="#language">language</a>  constructs, to the
+                <a href="#JsonResponseSchema">JsonResponseSchema</a>. The request will be a post having respecting <a href="#JsonResponseSchema">JsonResponseSchema</a>.
+                Why the request is that simple? Because it only needs the text from the user and all the necessary functionality will be handled by the backend.
+
+                <br>
+                <br>
+
+                Explaining the flow of the backend from a overview point, when we call the route the application sends the data to a <a href="#LanguageParser">LanguageParser</a>
+                instance. This instance will return at the end the result as a json. It tries to split the text by already knows components and afterwords validates
+                the existing components if they respect the criteria from the <a href="#language">language</a>. After that every element is parsed by their type, so
+                every element will have a dedicated parser. The result is then transformed into Entity class. Inside the entity class, we have a mechanism which will
+                find all the not specified properties and query the antology for default values. Of course even at this part, we have specific query for every
+                component. At the end the result data are agregated and returned.
+                <br>
+                <br>
+                <img class="img-ss" src="architecture documentation\diagrams\FlowDiagram.jpg" alt="Backend flow diagram">
+                <br>
+            </p>
+
+            <p>
+                <b>Entities</b>
+                <br>
+                Available values for entities properties were added to a data class named AvailableProperties. All entities will extend a base class named
+                BaseEntity which has 2 properties, available properties, explained before and baseEntityQuery, see in next section. Also, this class has
+                an abstract method toJson, which should return a json representation of the object. Every one of these objects have different properties
+                and one most commonly used is TextProperties, which is another entity class. This entities are strongly coupled BaseEntityQuery. The flow
+                is as follows: we create the object and before finishing the creation, inside the constructor, we query the antology for default values,
+                combine the result and the transform the object to json <a href="#JsonResponseSchema">JsonResponseSchema</a>. These entities are separated
+                in two categories: compositional objects and structural ones. These distinction was made because the compositional elements are end
+                element which mainly do not contain other elements in them whereas structural ones do contain more compositional elements inside them.
+                Between compositional object we have: Image, Video, Alert, Audio, PhotoGallery, Button, Paragraph, Heading, Profile, Input, Link, Slider,
+                Calender and TextProperties. Structural elements are: List, Header, Navbar, Table, Footer, Aside.
+                <br>
+                <br>
+                <img class="img-ss-small" src="architecture documentation\images\AlertEntitiy.PNG" alt="Alert entity">
+            </p>
+
+            <p>
+                <b>SPARQL Queries</b>
+                <br>
+                As explained above, sparql queries were used to obtain default values from the default instances in the antology. For obtaining this
+                data, two helper classes were created (QueryExecutor, GenericQuery). First one is used for more complex queries which cannot be easily
+                done in a generic setup, when the second one is used for generic queries which can be easily implemented on a key, keyToProp base.
+                What I mean by key, keyToProp base is that, for every missing key, we have a specific part of the query which can be easily added to the
+                map with the name of the key. In some cases, this is not possible because of the need of nested object, for example TextProperties, where
+                Query executor will be used. These helper clases will be used in specific query classes based on the object type. All classes with
+                extend the functionaliy of the BaseEntityQeury class having an execute method with required argument keys and a map from key (meaning
+                object properties) to part of the sparql query that will extract data. Between these classes we have: QuerySlider, QueryImage,
+                QueryCalendar, QueryAlert, QueryAudio, QueryButton, QueryVideo, QueryHeader, QueryPhotoGallery, QueryList, QueryTable, QueryMain,
+                QueryFooter, QueryAside, QueryNavba, QueryParagraph, QueryHeading, QueryInput, QueryProfile, QueryLink.
+                <br>
+                <br>
+                <img class="img-ss-small" src="architecture documentation\images\QueryExecutor.png" alt="Query executor">
+                <br>
+                <img class="img-ss-small" src="architecture documentation\images\queryAlert.png" alt="Query alert">
+            </p>
+
+            <p>
+                <b>Language Parsers</b>
+                <br>
+                The top level class responsible of handling the the parsing of the given text is the LanguageParser, which will separate text by known
+                structural entities, and valitate that the text respects the requiments added in the <a href="#language">language</a>. Of course, there
+                is a big difference between parsing compositional elements and structural ones. As compositional are end level, they do not need further parsing whereas
+                strutural ones, need also a parsing on the element level. So, by parsing structural elements, we also then parse inside this be
+                compositional ones. So then a new class will be needed, named ElementParser which will parse this compositional elements by their known
+                text representation. This class will provide a switch functionality of selecting the correct parser for each element. Between these
+                parsers we have: ParseAlert, ParseAudio, ParseButton, ParseCalendar, ParseHeading, ParseImage, ParseInput, ParseParagraph,
+                ParsePhotoGallery, ParseNavbar, ParseMain, ParseList, parseFooter, ParseHeader, PArseAside, ParseVideo, ParseUserProfile, ParseSlider,
+                ParseTable.
+            </p>
+
+            <p>
+                <b>Flask HTTP APP</b>
+                <br>
+                The flask application will be responsabile of redirecting the request to their solving implementations. So mainly speaking of /language
+                route. If the flow is correct, an success response of <a href="#JsonResponseSchema">JsonResponseSchema</a> is send. If not, then if the
+                error is a know one, it is returned and if possible the position where it does occur. If the error is not know, then a generic error
+                message is send and an a recommandation to visit the <a href="#language">language</a> docs to better understand how to write the query
+                data. See befow image to better understand the backend components.
+                <br>
+                <br>
+                <img class="img-ss" src="architecture documentation\diagrams\ClassDiagram.jpg" alt="Backend class diagram">
+            </p>
+<!--              
+            <section>
+                <h4><span>2.2.1 </span>Language constructs</h3>
+                <p>
+                    <b>Language constructs</b>
+                    <br>
+                    For a easier modeling process, a description language on which the UI response will be shows was created. The following sections will
+                    explain it in detail and also which examples regarding any posible elements and its available properties. Also, to remember that, even
+                    in this language, the components are separated into the know categories: compositional, structural.
+
+                    // TODO
+                    !!! ADD ALL language components
+                </p>
+            </section> -->
+
+            <p>
+                <b>Backend response schema</b>
+                <br>
+                The responses returned by the /language api are in json format and have the following structure. The first, status property states
+                wheter or not an error has occured. Of course, ERROR means an error occured and SUCCCES mean the FRONTEND can parse it to create the
+                interface. Both of them have then, and response object, which has different construction in each case. In case of error, ERROR_REASON
+                states why the error occured and the positionInText states where the error occured. If the error is not a predefined one, then an
+                generic error message is returned and positionInText states that it is not available. The success reponse, then contains a list of
+                sections. This list of sections respect the <a href="#language">language</a> requirements. And this list is a uppercase list containing
+                the names of all available sections in the UI. After that, each available structural sections is added with their properties and their
+                list of elements. See below explained schema for a better understanding of how these json representation look like.
+            </p>
+
+            <p>
+                <b>Call /language API examples</b>
+                <br>
+                This section ilustrates the returned by the API for almost all available components. This is the exact values returned by the API.
+            </p>
+
+            <p>
+                <b>Default values</b>
+                <br>
+                Here is a list of default values used fost components. Of course, these values can be better seen inside the antology.
+            </p>
+
+            <p>
+                <b>Antology</b>
+                <br>
+                The antology was created exactly for mapping existing components properties. At top level, under owl:Thing, we have TextualElement
+                and WebElement. Textual Element is a more abtract class which refers to text and its properties: font color, size, style, decoration.
+                Under this we have Label, Text and Username, which are different entities, and also have different constraints. For example, Username
+                string value must be between 3 and 16 characters, text can have any length, and label must have at most 128 characters. Moving to
+                WebElement, it is a generic object which contains properties hold by all elements. As an child of this, we have the well known
+                CompositionalElement and StructuralElement classes. In addition, here is also present the alert element as it cannot be considered of
+                any of the other types. Now, looking at compositionalElement, we again seperate it into TextBasedElements, which refer to elements that
+                are mainly based on text and NonTextBasedElements. Between TextBasedElements we have: Heading, Paragraph, Link, TextInput, SearchInput.
+                Between NonTextBasedElements we have: Video, ZoomSlider, OpacitySlider, Audio, PhotoGallery, Calendar, Image, buttons(Cancel, download,
+                save, edit, submit, reset). Going back to strucural elements, as its child we have: Table, OrderedList and different sections as Main,
+                Footer, Header, NavigationBar, Aside. For a better understanding please see Antology.owl. Also, take a look the the below image about
+                antology.
+                <br>
+                <img class="img-ss" src="architecture documentation\images\antologyPretege.png" alt="antologyPretege">
+                
+            </p>
+
+        </section>
+
+        <section>
+            <h3><span>2.3 </span>Language constructs</h3>
+            <p>
+                For a easier modeling process, a description language on which the UI response will be shows was created. The following sections will
+                explain it in detail and also which examples regarding any posible elements and its available properties. Also, to remember that, even
+                in this language, the components are separated into the know categories: compositional, structural.
+            </p>
+
+            <p>
+                <b>Language Specification Description</b> 
+                <br>
+                <span class="mono">[]</span> -> optional  
+                <br>
+                <span class="mono">list(el , ..)</span> -> list of elements of type el 
+                <br>
+                <span class="mono">{el}</span> -> instance of type el  
+                <br>
+                <span class="mono">'it'</span> -> denotes that it is an instance (not abstract class)  
+                <br>
+            </p>
+
+
+            ==============================================================SECTION=====================================================================
+            HELPER DESCRIPTORY FUNCTIONS
+            ==============================================================SECTION=====================================================================
+
+            size(list(el, ..)) -> function that returns the size of the list
+            checkInstaceCount(x, el) -> function that verifies if each instance of type el appears maximum x times
+            checkElementsApparitions(x, elements..) -> function that verifies that maximum x of the elements appear
+
+            ==============================================================SECTION=====================================================================
+            ELEMENTS EXPLAINED IN NATURAL LANGUAGE
+            ==============================================================SECTION=====================================================================
+
+            httpReference -> any http url
+            videoReference -> any http video reference
+            audioReference -> any http audio reference
+            imageReference -> any image http reference
+            textString -> any text stribg
+            number -> the set of natural numbers
+
+            ==============================================================SECTION=====================================================================
+            ELEMENT PROPERTIES
+            ==============================================================SECTION=====================================================================
+
+            size = small|big|medium
+            quality = 144|240|360|480|720|1080
+            color = black|blue|brown|gray|green|orange|purple|red|white|yellow
+            backgroundColor = black|blue|brown|gray|green|orange|purple|red|white|yellow
+            font = arial|brush script mt|courier new|garamond|georgia|tahoma|times new roman|verdana
+            textStyle = bold|italic|underlined|bold and italic|bold and underlined|italic and underlined
+            borderStyle = dashed|dotted|double|groove|solid
+            tableArrange = rows|columns
+            tableOrder = finish to start|start to finish
+            ordoredListStyle = decimal|lower-alpha|upper-alpha
+            unordoredListStyle = circle|disc|square
+            sectionArrange = vertically|horizontally
+            placement = below|above|to the left|to the right, where this placement is related to the previous element if space available. If not, it is ignored.
+
+            ==============================================================SECTION=====================================================================
+            ELEMENT TYPES
+            ==============================================================SECTION=====================================================================
+
+            structuralElement = listElement|sectionElement|'table'
+            listElement = [{ordoredListStyle}] 'ordered list'|[{unordoredListStyle}] 'unordored list'
+            sectionElement = contentSection|'navigation bar section'
+            contentSection = 'aside section'|'main section'|'footer'|'header'
+            compositionalElement = imageType|buttonType|inputType|'slider'|'video'|'user profile'|'photoGallery'|'link'|'calendar'|'audio'|'heading'|'paragraph'
+            inputType = 'search input'|'text input'
+            imageType = 'photo'|'logo'|'thumbnail'
+            buttonType = 'cancel button'|'download button'|'edit button'|'reset button'|'save button'|'submit button'
+
+            ==============================================================SECTION=====================================================================
+            LANGUAGE LAYOUT STRUCTURE EXEMPLIFICATION
+            ==============================================================SECTION=====================================================================
+
+            Language structure:
+                Build list(structuralElement, ..). [alert], where size(list(structuralElement, ..)) <= 6 and checkInstaceCount(1, structuralElement) and checkElementsApparitions(1, main section, ListElement, table)
+            example: Build a main section having a download button, 5 images a header section having an image
+
+            SUBSECTION = Structural language exemplification
+            listComposition=list(({number}|a|an) {compositionalElement}[s] [placed {placement}], ..)
+            example: a download button, 5 images placed above
+
+            a [{sectionArrange} arranged] [{backgrondColor}] ({contentSection}) [having {listComposition}] 
+            example: a vertically arranged red main section having 5 images, 3 paragraphs
+
+            a [{backgrondColor}] navigation bar section [with list(link, ..)]
+            a red navigation bar section with a link with displayed text "fb" referencing "www.facebook.com", a link with displayed text "yt" referecing "www.youtube.com"
+
+            a [{backgrondColor}] {listElement} of {listComposition}.
+            example: A green lower-latin ordered list of 5 images, 4 paragraphs, 10 buttons.
+
+            a [{backgrondColor}] table with list({number} (compositionalElement),..) [by rows|by column]  <= not recommended
+            a gray table with 5 images 5 paragraphs 5 buttons by rows
+
+            a [{backgrondColor}] table of {number} lines {number} columns [with a [{color}] [{borderStyle}] border [of {number} pixels]] [arranged [{tableOrder}] by [{tableArrange}]] [having {listComposition}]
+            a yellow table of 5 lines 7 columns with a red dotted border of 5 pixels arranged start to finish by rows having a button, a paragraph each
+
+            ==============================================================SECTION=====================================================================
+            COMPOSITIONAL LANGUAGE EXEMPLIFICATION
+            ==============================================================SECTION=====================================================================
+
+            a [{backgrondColor}] paragraph [with [{textStyle}] [{color}] text ["{textString}"]] [having {font} style] [of {number} pixels].
+            example: A red paragraph with bold and italic text "hello from the other side" having arial style of 16 pixels.
+
+            a [{backgrondColor}] heading [with [{textStyle}] [{color}] text ["{textString}"]] [having {font} style] [of {number} pixels].
+            example: A purple heading with bold and italic red text "hello from the other side" having Arial style of 32 pixels.
+
+            an alert displaying "{textString}" [after {number} seconds].
+            example: An alert displaying "welcome to our website" after 15 seconds.
+
+            a [{backgrondColor}] link [with [{textStyle}] [{color}] displayed text ["{textString}"]] [having {font} style] [of {number} pixels] [referencing "{httpReference}"]
+            example: A red link with bold and underlined displayed text "go to facebook" having Arial style of 10 pixels referencing "www.facebook.com".
+
+            a [[[{size}] [{backgrondColor}]] {inputType} [[with [{textStyle}] [{color}] input text] [having {font} style] [of {number} pixels]]
+            example: A small red search input with input text of 5 pixels.
+
+            a [{size}] [looped] video [of {number} minutes] [having source="{videoReference}"] [of {quality} pixels]
+            example: A small looped video of 5 minutes having source="https://www.youtube.com/watch?v=bAVKp0X9JnQ&list=RD_3NxUWq3t_g&index=8" of 720 pixels.
+
+            an [{size}] [looped] audio [of {number} minutes] [having source="{audioReference}"].
+            example: A big looped audio of 5 minutes having source="https://www.shutterstock.com/music.mp3".
+
+            a [{size}] [disabled] [{buttonType}|image button with source="{imageReference}"].
+            example: A big disabled ResetButton.
+            example: A small button with source="https://www.shutterstock.com/button-photo".
+
+            a [{size}] {imageType} with source={imageReference}.
+            example: A small image with source="https://www.shutterstock.com/image-photo".
+
+            a [[{size}] [{backgrondColor}]] photogallery [[of {number} images]|[with photos "{imageReference}", "{imageReference}", ..]].
+            example: A small red photogallery of 15 images.
+            example: A big green photogalerry with photos "https://www.shutterstock.com/image-photo", "https://www.shutterstock.com/image-photo", "https://www.shutterstock.com/image-photo".
+
+            a [{size}] {sliderType} [with minimum value of {number} and maximum value of {number}].
+            example: A big opacity slider with minimum value of 15 and maximum value of 78.
+
+            a [[{size}] [{backgrondColor}]] user profile [with [{textStyle}] [{color}] username ["{textString}"] and image with source="{imageReference}"] [placed {placement}].
+            example: A small red user profile with Arial red username "alex" and image with source="https://www.shutterstock.com/profile".
+
+            a [{size}] calender.
+            example: A medium calendar.
+            // TODO
+            !!! ADD ALL language components
+        </section>
+    </section>
+
+    <section id="application-architecture">
+        <h2><span>2. </span>General application architecture</h2>
+        <p>
+            The application is divided into two parts:
+            <ul>
+                <li>
+                    the ui interface where the user has access
+                </li>
+                <li>
+                    the API which is called when the user submits a request
+                </li>
+            </ul>
+        </p>
+        <p>
+            The ui consists of a formular for the user where they may type in the description of a Web interface by using a set of controlled language constructs 
+            based on which a new page will be generated. The user will be able to access the new page by following the link provided after submitting the request.
+        </p>
+        <img class="img-ss-smaller img-bg" src="C4_level1.png" alt="Screenshot of information table structure">
+        <p>
+            <br>
+            Examples of descriptions using language constructs:
+            <ul>
+                <li>
+                    Build a section with <i>x</i> images|videos and <i>y</i> paragraphs placed below|above|left|right.
+                </li>
+                <li>
+                    Build main section having a user profile with minimum 2 paragraph, 1 image and a submit button labeled "Edit" vertically|horizontally arranged.
+                </li>
+            </ul>
+        </p>
+        
+        
+        <section id="frontend">
+            <h3><span>2.1 </span>Frontend</h3>
+
+            <p>
+                The frontend side of the project is made using the 
+                <span typeof="schema:WebSite" resource="https://reactjs.org/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="reactjs">
+                        <meta property="schema:url" content="https://reactjs.org/">
+                    </span>
+                    <a href="https://reactjs.org/"><span property="schema:name">React</span></a>
+                </span>
+                library and contains 2 pages.
+                <br>
+                On the <span class="mono">/</span> path the implementation is straightforward, as the text from the formular will be sent in a 
+                <span typeof="schema:WebAPI">
+                    <meta property="documentation" content="TODO link to the api documentation">
+                    POST
+                </span>
+                request to the API server and a link will become available to lead the user to the newly generated interface template.
+                <br>
+
+                <img class="img-ss-smaller" src="architecture documentation/ui-sketches/MainPagePreview.png" alt="Main page preview">
+                
+                <br>
+                On the <span class="mono">/:uuid</span> path, the shown page will contain the generated interface with the specified components and the 
+                required inputs for the user to finish setting the displayed information.
+                <br>
+                As an example, for the following description, there will be displayed a page like in the image below.
+                <br><br>
+                <span class="mono">'Build a section with 2 images and 1 paragraph placed above'</span>
+                <br><br>
+                <img class="img-ss-smaller" src="architecture documentation/ui-sketches/TemplatePageExample.png" alt="Template page example preview">
+                <br><br>
+                <i>* As a node, the positional property of the components will consider the previous component only.</i>
+                <br>
+                Once the template is shown, the user will be able to edit the components data by clicking on the edit button from the corner of the element.
+                <br>
+                <img class="img-ss-smaller" src="architecture documentation/ui-sketches/TemplatePageEdit.png" alt="Template page example edit preview">
+            </p>
+        </section>
+
+        <section id="backend">
+            <h3><span>2.2 </span>Backend</h3>
+
+            <p>
+                The backend side will be made using 
+                <span typeof="schema:WebSite" resource="https://nodejs.org/en/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="nodejs">
+                        <meta property="schema:url" content="https://nodejs.org/en/">
+                    </span>
+                    <a href="https://nodejs.org/en/"><span property="schema:name">nodejs</span></a>
+                </span>
+                language with 
+                <span typeof="schema:WebSite" resource="https://expressjs.com/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="express">
+                        <meta property="schema:url" content="https://expressjs.com/">
+                    </span>
+                    <a href="https://expressjs.com/"><span property="schema:name">express</span></a>
+                </span>
+                library and will provide two API routes:
+                <ul>
+                    <li>
+                        <span class="mono">/generateTemplate</span> - a POST endpoint which will accept a text description that defines the componnets and their properties 
+                        for the interface
+                    </li>
+                    <li>
+                        <span class="mono">/generated/:uuid</span> - a GET endpoint which will return the generated components for the template page
+                    </li>
+                </ul>
+                <p>
+                    The API specifications can be found on 
+                    <span typeof="schema:WebSite" resource="https://app.swaggerhub.com/home">
+                        <span property="schema:copyrightHolder" typeof="WebSite">
+                            <meta property="schema:name" content="swagger">
+                            <meta property="schema:url" content="https://app.swaggerhub.com/home">
+                        </span>
+                        <a href="https://app.swaggerhub.com/home"><span property="schema:name">swagger</span></a>
+                    </span>
+                    accessed <a href="https://app.swaggerhub.com/apis-docs/alexandru.hutu1/LanguageWebsiteModelator/1.0#/">here</a>.
+                </p>
+                <br>
+
+                <p>
+                    The parser will detect certain keywords that will represent different components, placements, colors or other important factors.
+                    <br>
+                    The components will be divided in two categories:
+                </p>
+                <ul>
+                    <li>
+                        wrappers, with keywords like: 
+                        <span class="mono">container</span>, 
+                        <span class="mono">div</span>, 
+                        <span class="mono">wrapper</span>, 
+                        <span class="mono">box</span>, 
+                        <span class="mono">header</span>, 
+                        <span class="mono">footer</span>, 
+                        <span class="mono">section</span>, 
+                        <span class="mono">table</span>
+                    </li>
+                    <li>
+                        final components, for example:
+                        <span class="mono">input</span>,
+                        <span class="mono">button</span>,
+                        <span class="mono">paragraph</span>,
+                        <span class="mono">image</span>,
+                        <span class="mono">video</span>,
+                        <span class="mono">title</span>
+                    </li>
+                </ul>
+                <p>
+                    The placements will consider the previous component as the anchor when deciding the position, and these may be: 
+                    <span class="mono">above</span>,
+                    <span class="mono">right</span>,
+                    <span class="mono">below</span>,
+                    <span class="mono">left</span>.
+                    <br>
+                    Or they will be absolute positions with keywors like: 
+                    <span class="mono">top</span>,
+                    <span class="mono">end</span>,
+                    <span class="mono">bottom</span>,
+                    <span class="mono">start</span>,
+                    <span class="mono">side</span>.
+                    <br>
+                    Or as a way of arranging the components in a wrapper:
+                    <span class="mono">row</span>, 
+                    <span class="mono">column</span>,.
+                </p>
+                <p>
+                    The colors will be available as regular words, e.g. 
+                    <span class="mono">red</span>,
+                    <span class="mono">green</span>,
+                    <span class="mono">light-blue</span>,
+                    <span class="mono">teal</span>,
+                    <span class="mono">purple</span>,
+                    etc.
+                </p>
+                <p>
+                    There're also the control keywords: <span class="mono">build</span>.
+                </p>
+
+                <img class="img-ss-medium img-bg" src="architecture documentation/diagrams/c4 diagrams/C4_level3.png" alt="Level 3 of C4 diagram">
+                
+            </p>
+
+
+        </section>
+
+    </section>
+
+    <section id="ontology">
+        <h2><span>3. </span>Ontology</h2>
+        <p>
+            The ontology will be created as a base for the components and their properties. The previously mentioned component types will be added as classes
+            into the ontology with their specific properties and relations.
+        </p>
+
+    </section>
+
+    <section id="linked-data-principles">
+        <h2><span>4. </span>Linked data principles</h2>
+        <p>
+            Every element that will be generated will contain the metadata specific to the element from the ontology and the ontology will have references
+            for the properties to other relevant ontologies.
+            <br>
+            Further details will be added as the solution will be developed.
+            <br><br>
+            <b>The four rules:</b>
+            <br>
+            1. Use URIs as names for things
+            <br>
+            2. Use HTTP URIs so that people can look up those names.
+            <br>
+            3. When someone looks up a URI, provide useful information, using the standards (RDF*, SPARQL)
+            <br>
+            4. Include links to other URIs. so that they can discover more things.
+            <br>
+        </p>
+
+    </section>
+
+
+    <section id="references">
+        <h2><span>4. </span>Referințe</h2>
+            <ul>
+                <li property="schema:citation" typeof="schema:WebSite" resource="https://developer.mozilla.org/en-US/">
+                    <cite property="schema:name">
+                        <a href="https://developer.mozilla.org/en-US/">MDN Web Docs</a>
+                    </cite>
+                </li>
+            </ul>
+
+    </section>
+
+
+
+
+
+
 
     <section id="introduction">
         <h2><span>1. </span>Introduction</h2>
