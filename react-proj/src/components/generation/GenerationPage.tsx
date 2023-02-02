@@ -39,12 +39,14 @@ const GenerationPage: FC<GeneratedPageProps> = () => {
 
     return (
         <div className={styles.container}>
-            <div className={`${styles.header} ${styles.chunk}`}>
+            <div vocab="https://schema.org/" typeof="WPHeader" className={`${styles.header} ${styles.chunk}`}>
+                <span className={styles.hidden} property="cssSelector">{styles.header}</span>
                 {
                     page.header ? buildStructure(page.header) : ''
                 }
             </div>
-            <div className={styles.navbar}>
+            <div vocab="https://schema.org/" typeof="SiteNavigationElement" className={styles.navbar}>
+                <span className={styles.hidden} property="cssSelector">{styles.navbar}</span>
                 {
                     page.navbar ? buildStructure(page.navbar) : ''
                 }
@@ -60,12 +62,14 @@ const GenerationPage: FC<GeneratedPageProps> = () => {
                     page.table ? buildTable(page.table) : ''
                 }
             </div>
-            <div className={styles.aside}>
+            <div vocab="https://schema.org/" typeof="WPSideBar" className={styles.aside}>
+                <span className={styles.hidden} property="cssSelector">{styles.aside}</span>
                 {
                     page.aside ? buildStructure(page.aside) : ''
                 }
             </div>
-            <div className={styles.footer}>
+            <div vocab="https://schema.org/" typeof="WPFooter" className={styles.footer}>
+                <span className={styles.hidden} property="cssSelector">{styles.footer}</span>
                 {
                     page.footer ? buildStructure(page.footer) : ''
                 }

@@ -2,7 +2,6 @@ import { FC, useRef, useState } from 'react';
 import * as generationService from "../../services/generation-service";
 import styles from './HomePage.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { PageStructure } from '../../models/page-structure.model';
 import { ResponseError } from '../../models/response-error.model';
 import { generatedPageKey } from './constants';
 import { GeneratePageResponse } from '../../services/generation-service';
@@ -50,7 +49,7 @@ const Statistics: FC<StatisticsProps> = () => {
                         <div></div>
                         <div></div>
                     </div>
-                    <div className={styles.explanations}>
+                    <div vocab="https://schema.org/" typeof="Text" className={styles.explanations}>
                         <h3>Welcome to our UICS website.</h3>
                         <br />
                         <h4>Here you will find a guide for the possible language constructs and their rules:</h4>
@@ -68,7 +67,8 @@ const Statistics: FC<StatisticsProps> = () => {
                     </div>
                 </div>
                 <div className={styles.right}>
-                    <div className={styles.formArea}>
+                    <div vocab="https://schema.org/" typeof="Text" className={styles.formArea}>
+                        <span className={styles.hidden} property="defaultValue">{textarenaPlaceholder}</span>
                         <textarea
                             className={styles.textarena}
                             placeholder={textarenaPlaceholder}
