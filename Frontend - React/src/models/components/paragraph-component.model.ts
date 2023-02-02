@@ -1,0 +1,8 @@
+import { ColorEnum } from "../enums/color.enum";
+import { TextProperties } from "../text-properties.model";
+
+export interface ParagraphComponent {
+    backgroundColor: ColorEnum,
+	text: string,
+	textProperties: TextProperties,
+};
