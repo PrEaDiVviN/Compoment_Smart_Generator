@@ -33,15 +33,6 @@ const Statistics: FC<StatisticsProps> = () => {
         });
     }
 
-    const downloadTxtFile = () => {
-      const element = document.createElement("a");
-      const file = new Blob(['../../assets/language.txt'], {type: 'text/plain;charset=utf-8'});
-      element.href = URL.createObjectURL(file);
-      element.download = 'language.txt';
-      document.body.appendChild(element);
-      element.click();
-    }
-
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -64,7 +55,7 @@ const Statistics: FC<StatisticsProps> = () => {
                         <br />
                         <h4>Here you will find a guide for the possible language constructs and their rules:</h4>
                         <br />
-                        <a href="../../language.txt" type="text/plain" download="language.txt">
+                        <a href="language.txt" type="text/plain" download="language.txt">
                             Language rules..
                         </a>
                         <br />
