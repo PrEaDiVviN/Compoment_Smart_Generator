@@ -108,14 +108,62 @@
             <img class="img-ss-400" src="../Architecture/Images/UI specification schema/Language to  interface desired results/example13.png" alt="Example 13">
             <img class="img-ss-400" src="../Architecture/Images/UI specification schema/Language to  interface desired results/example14.png" alt="Example 14">
             <img class="img-ss-400" src="../Architecture/Images/UI specification schema/Language to  interface desired results/example15.png" alt="Example 15">
+            <br><br>
+
+            
+        </p>
+        <p>
+            <b>Requiments</b><br>
+    
+            By considering an UI component API provided by a library/framework - for instance, a React UI component solution like MUI and/or Ionic UI Components -, 
+            create an OWL-based ontology able to specify the interactive I/O controls/components. This knowledge model will be used to cleverly suggest and generate - 
+            via a SPARQL end-point - the proper controls for various Web interfaces by using a set of controlled language constructs such as "Build a section with I images|videos 
+            and P paragraphs placed below|above|left|right" or "Build main section having a user profile with minimum 2 paragraph, 1 image and a submit button labeled "Edit" 
+            vertically|horizontally arranged". Several keywords/parameters could be inserted to express the interface designer's intention - e.g., a section could have a specific 
+            role (content, navigation, download, footer, photo gallery, calendar, slider, and so on); using a direction indicator such as "ltr" (left to right); instead of "image", 
+            some refined terms could be used to specify the semantics: "photo", "diagram", "logo", "chart" with some modifiers like "big", "small", "medium", "responsive" 
+            (examples: "Build an aside|main section with 2 small photos 1 search input 2 nav links 1 download button", "Build a table with 5 images 5 paragraphs 5 buttons by 
+            rows|columns" - if 'columns' is chosen, the tool automatically can generate 5 columns, each column having 1 image, 1 paragraph, and 1 button).
+
         </p>
 
         <section id="frontend">
             <h3><span>1.1 </span>Frontend</h3>
 
             <p>
-                The UI side of the application was made using ###React library along with different libraries e.g. ###axios, ###router-dom, and 
-                technologies like ###sass and ###typescript. <br>
+                The UI side of the application was made using 
+                <span typeof="schema:WebSite" resource="https://reactjs.org/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://reactjs.org/">
+                    </span>
+                    <a href="https://reactjs.org/"><span property="schema:name">React</span></a>
+                </span>
+                library along with different libraries e.g.
+                <span typeof="schema:WebSite" resource="https://axios-http.com/docs/intro">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://axios-http.com/docs/intro">
+                    </span>
+                    <a href="https://axios-http.com/docs/intro"><span property="schema:name">axios</span></a>
+                </span>, 
+                router-dom, and 
+                technologies like 
+                <span typeof="schema:WebSite" resource="https://sass-lang.com/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://sass-lang.com/">
+                    </span>
+                    <a href="https://sass-lang.com/"><span property="schema:name">sass</span></a>
+                </span>
+                and 
+                <span typeof="schema:WebSite" resource="https://www.typescriptlang.org/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://www.typescriptlang.org/">
+                    </span>
+                    <a href="https://www.typescriptlang.org/"><span property="schema:name">typescript</span></a>
+                </span>. <br>
                 The development started with the main pages of the application
                 <ul>
                     <li>the home page on the <span class="mono">/</span> (home) path</li>
@@ -175,9 +223,20 @@
                 <li>Video</li>
             </ul>
             <p>
-                Each component can be customized by some parameters which will be taken into consideration when generating the html and the styling.
+                Each component can be customized by some parameters which will be taken into consideration when generating the html and the styling. They are dynamically generated
+                based on the properties and the element lists in the structures. The newly generated html will have css classes specific to their properties, for example,
+                the font size will be a value between 0.5, 1 and 2 rem and it will multiply based on the font size set on the component to match the components sizes as well as 
+                different screen resolutions.
                 <br>
-                The styling is made by adapting the ###tailwind css model along with standard style classes to dinamically set the appearance of the 
+                The styling is made by adapting the
+                <span typeof="schema:WebSite" resource="https://tailwindcss.com/docs/utility-first">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://tailwindcss.com/docs/utility-first">
+                    </span>
+                    <a href="https://tailwindcss.com/docs/utility-first"><span property="schema:name">tailwind css</span></a>
+                </span>
+                model along with standard style classes to dinamically set the appearance of the 
                 components using the object properties.
             </p>
             <img class="img-ss" src="../Architecture/Images/Page Layout/pageLayout.png" alt="Page layout">
@@ -208,7 +267,37 @@
             <p>
                 <b>Used libraries for main functionality</b>
                 <br>
-                The backend API was all written in ###Python. Between the external libraries used we have ###Flask, ###Moviepy and ###rdflib. Flask was 
+                The backend API was all written in 
+                <span typeof="schema:WebSite" resource="https://www.python.org/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://www.python.org/">
+                    </span>
+                    <a href="https://www.python.org/"><span property="schema:name">python</span></a>.
+                </span>
+                Between the external libraries used we have 
+                <span typeof="schema:WebSite" resource="https://flask.palletsprojects.com/en/2.2.x/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://flask.palletsprojects.com/en/2.2.x/">
+                    </span>
+                    <a href="https://flask.palletsprojects.com/en/2.2.x/"><span property="schema:name">Flask</span></a>,
+                </span>
+                <span typeof="schema:WebSite" resource="https://zulko.github.io/moviepy/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://zulko.github.io/moviepy/">
+                    </span>
+                    <a href="https://zulko.github.io/moviepy/"><span property="schema:name">Moviepy</span></a>
+                </span>
+                and 
+                <span typeof="schema:WebSite" resource="https://rdflib.readthedocs.io/en/stable/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://rdflib.readthedocs.io/en/stable/">
+                    </span>
+                    <a href="https://rdflib.readthedocs.io/en/stable/"><span property="schema:name">rdflib</span></a>.
+                </span>Flask was 
                 used for providing the routes and return data because it can be used easily and has great extensibility. The routher provided by flask 
                 are /audio, /video, /image, /language. MoviePy was used to crop the video file to the specified length. No other usage in the project.
                 <br>
@@ -959,7 +1048,6 @@
     <section id="rdf-model">
         <h2><span>3. </span>RDF based knowledge model - Ontology</h2>
         <p id="ontology">
-            <br>
             The ontology was created exactly for mapping existing components properties. At top level, under owl:Thing, we have TextualElement
             and WebElement. Textual Element is a more abtract class which refers to text and its properties: font color, size, style, decoration.
             Under this we have Label, Text and Username, which are different entities, and also have different constraints. For example, Username
