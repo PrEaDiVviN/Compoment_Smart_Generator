@@ -1,4 +1,11 @@
 =============================================================================SECTION==================================================================================
+DESCRIPTION
+=============================================================================SECTION==================================================================================
+Please take into consideration that '..' means the inside or an actual object. So for the matrix example, 'paragraph: ..', the two dots should be replaced with 
+compositional element paragraph. In case of the Json response section, here header: {..}, mean the content of the structural header element. This structural element 
+can be visible in its structural section with all its properties.
+
+=============================================================================SECTION==================================================================================
 PROPERTIES METADATA - ENUMS
 =============================================================================SECTION==================================================================================
 
