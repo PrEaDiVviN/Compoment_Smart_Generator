@@ -1,1 +1,0 @@
-On the following page will be presented the requirements of the project: https://docs.google.com/document/d/18fZ64nX3bLooH98pcA-vewHoJ__cDCJiyqsOaR9rR_Q/edit?usp=sharing
