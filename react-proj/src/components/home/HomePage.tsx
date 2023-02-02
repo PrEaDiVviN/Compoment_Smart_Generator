@@ -64,7 +64,7 @@ const Statistics: FC<StatisticsProps> = () => {
                         <br />
                         <h4>Here you will find a guide for the possible language constructs and their rules:</h4>
                         <br />
-                        <a href="/" onClick={downloadTxtFile}>
+                        <a href="../../language.txt" type="text/plain" download="language.txt">
                             Language rules..
                         </a>
                         <br />
