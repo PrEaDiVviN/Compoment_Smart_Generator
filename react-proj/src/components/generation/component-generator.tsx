@@ -22,8 +22,10 @@ import { ButtonTypeEnum } from "../../models/enums/button-type.enum";
 export const buildAudio = (element: AudioComponent, index: number) => {
     const size = element.size;
     return (
-        <audio className={style(`audio-${size}`)} controls key={index}>
+        <audio vocab="https://schema.org/" typeof="AudioObject" className={style(`audio-${size}`)} controls key={index}>
             <source src={element.source} />
+            <span className={style('hidden')} property="duration">{element.audioLength}</span>
+            <span className={style('hidden')} property="embedUrl">{element.source}</span>
             Your browser does not support the audio element.
         </audio>
     );
@@ -31,7 +33,7 @@ export const buildAudio = (element: AudioComponent, index: number) => {
 export const buildButton = (element: ButtonComponent, index: number) => {
     const size = element.size;
     return (
-        <div key={index}
+        <div vocab="https://schema.org/" typeof="ImageObject" key={index}
             className={style('button', `button-${size}`, `button-${element.disabled ? 'disabled' : element.type}`)}
             style={
                 element.type === ButtonTypeEnum.NONE ? {
@@ -39,6 +41,7 @@ export const buildButton = (element: ButtonComponent, index: number) => {
                 } : {}
             }
         >
+            <span className={style('hidden')} property="embedUrl">{element.image}</span>
             <span className={style('button-span')}>
                 { buttonTexts[element.type] }
             </span>
@@ -68,7 +71,9 @@ export const buildHeading = (element: HeadingComponent, index: number) => {
     const fontStyle = element.textProperties.fontStyle;
     const bgColor = element.backgroundColor;
     return (
-        <h2 key={index} className={style('heading', `bg-${bgColor}`, 'radius', 't-pad')}>
+        <h2 vocab="https://schema.org/" typeof="Text" key={index} className={style('heading', `bg-${bgColor}`, 'radius', 't-pad')}>
+            <span className={style('hidden')} property="color">{element.textProperties.fontColor}</span>
+            <span className={style('hidden')} property="size">{element.textProperties.fontSize}</span>
             <span className={style(`font-color-${color}`, `font-dec-${decoration}`, `font-size-${size}`, `font-style-${fontStyle}`)}>
 
             {
@@ -81,13 +86,15 @@ export const buildHeading = (element: HeadingComponent, index: number) => {
 export const buildImage = (element: ImageComponent, index: number) => {
     const size = element.size;
     return (
-        <img key={index} className={style('image', 'radius', `img-${size}`)} src={element.source} alt='' />
+        <img vocab="https://schema.org/" typeof="ImageObject" key={index} className={style('image', 'radius', `img-${size}`)} src={element.source} alt='' />
     );
 }
 export const buildInput = (element: InputComponent, index: number) => {
     const isSearch = element.type === InputTypeEnum.SEARCH;
     return (
-        <label key={index} className={style('text-input-container')}>
+        <label vocab="https://schema.org/" typeof="Text" key={index} className={style('text-input-container')}>
+            <span className={style('hidden')} property="color">{element.textProperties.fontColor}</span>
+            <span className={style('hidden')} property="size">{element.textProperties.fontSize}</span>
             <div className={style('text-input-container-wrapper')}>
                 <input type="text" className={style('text-input')} />
                 {
@@ -107,11 +114,13 @@ export const buildLink = (element: LinkComponent, index: number) => {
 
     const linkOnClick = () => {
         window.open(element.reference, '_blank');
-
     }
 
     return (
-        <div onClick={linkOnClick} key={index} className={style(`bg-${bgColor}`, 'link', 'radius', 't-pad')}>
+        <div vocab="https://schema.org/" typeof="URL" onClick={linkOnClick} key={index} className={style(`bg-${bgColor}`, 'link', 'radius', 't-pad')}>
+            <span className={style('hidden')} property="url">{element.reference}</span>
+            <span className={style('hidden')} property="color">{element.textProperties.fontColor}</span>
+            <span className={style('hidden')} property="size">{element.textProperties.fontSize}</span>
             <a href={element.reference} className={style(`font-color-${color}`, `font-dec-${decoration}`, `font-size-${size}`, `font-style-${fontStyle}`)}>
                 {
                     element.text
@@ -127,7 +136,9 @@ export const buildParagraph = (element: ParagraphComponent, index: number) => {
     const fontStyle = element.textProperties.fontStyle;
     const bgColor = element.backgroundColor;
     return (
-        <div key={index} className={style(`bg-${bgColor}`, 'radius', 't-pad')}>
+        <div vocab="https://schema.org/" typeof="Text" key={index} className={style(`bg-${bgColor}`, 'radius', 't-pad')}>
+            <span className={style('hidden')} property="color">{element.textProperties.fontColor}</span>
+            <span className={style('hidden')} property="size">{element.textProperties.fontSize}</span>
             <p className={style('paragraph', `font-color-${color}`, `font-dec-${decoration}`, `font-size-${size}`, `font-style-${fontStyle}`)}>
                 {
                     element.text
@@ -194,7 +205,8 @@ export const buildPhotoGallery = (element: PhotoGalleryComponent, index: number)
     const disabledLeft = startIndex === 0 ? disabledClassName : '';
     const disabledRight = startIndex === element.images.length - 1 ? disabledClassName : '';
     return (
-        <div key={index} className={style('photo-gallery', `pg-${size}`, `bg-${bgColor}`)}>
+        <div vocab="https://schema.org/" typeof="ImageGallery" key={index} className={style('photo-gallery', `pg-${size}`, `bg-${bgColor}`)}>
+            <span className={style('hidden')} property="size">{element.photoNumber}</span>
             <AiOutlineDoubleLeft
                 className={`${style('pg-button', 'pg-left')} ${disabledLeft}`}
                 id={leftButtonId}
@@ -219,7 +231,9 @@ export const buildProfile = (element: ProfileComponent, index: number) => {
     const bgColor = element.backgroundColor;
     const size = element.size;
     return (
-        <div key={index} className={style('profile', 'radius', `bg-${bgColor}`, `profile-${size}`)}>
+        <div vocab="https://schema.org/" typeof="Person" key={index} className={style('profile', 'radius', `bg-${bgColor}`, `profile-${size}`)}>
+            <span className={style('hidden')} property="givenName">{element.text}</span>
+            <span className={style('hidden')} property="url">{element.source}</span>
             <img className={style('profile-image', `bd-${color}`)} src={element.source} alt="" />
             <span className={style(`font-color-${color}`, `font-dec-${decoration}`, `font-size-${textSize}`, `font-style-${fontStyle}`)}>
                 { element.text }
@@ -236,13 +250,13 @@ export const buildSlider = (element: SliderComponent, index: number) => {
     );
 }
 export const buildVideo = (element: VideoComponent, index: number) => {
-	// const quality = element.quality;
-	// const videoLength = element.videoLength;
     const size = element.size;
     return (
-        <video key={index} className={style('radius', `video-${size}`)} controls loop={element.looped}>
+        <video vocab="https://schema.org/" typeof="VideoObject" key={index} className={style('radius', `video-${size}`)} controls loop={element.looped}>
+            <span className={style('hidden')} property="duration">{element.videoLength}</span>
+            <span className={style('hidden')} property="embedUrl">{element.source}</span>
+            <span className={style('hidden')} property="videoQuality">{element.quality}</span>
             <source src={element.source} />
-
         </video>
     );
 }

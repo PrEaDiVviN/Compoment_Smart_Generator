@@ -29,7 +29,8 @@ export const buildStructure = (section: Structure) => {
     // const newElementsList = repositionElementsSecondaryAxis(section.elements, arrangement);
     let apparitionsCount = 0;
     return (
-        <div className={style(`full`, `bg-${bgColor}`, `arrange-${arrangement}`)}>
+        <div vocab="https://schema.org/" typeof="ItemList" className={style(`full`, `bg-${bgColor}`, `arrange-${arrangement}`)}>
+            <span className={style('hidden')} property="numberOfItems">{section.listSize}</span>
             {
                 section.elements.map((pair: ComponentPair, i: number) => {
                     const tempApparitionsCount = apparitionsCount;
@@ -49,7 +50,9 @@ export const buildList = (section: ListStructure) => {
         <div className={style('full', 'list', `bg-${bgColor}`, `list-marker-${listMarkerType}`)}>
             {
                 section.elements.map((pair: ComponentPair, i: number) => (
-                    <li key={i} className={style('li')}>
+                    <li vocab="https://schema.org/" typeof="ListItem" key={i} className={style('li')}>
+                        <span className={style('hidden')} property="position">{i}</span>
+                        <span className={style('hidden')} property="item">{JSON.stringify(pair.element)}</span>
                         <div className={style('inline')}>
                             {
                                 buildComponentFromPair(pair, 1)
@@ -71,9 +74,12 @@ export const buildTable = (section: TableStructure) => {
     const borderWidth = section.borderWidth;
     return (
         <div className={style('full', `bg-${bgColor}`)}>
-            <div className={style('table', `bg-${bgColor}`, `bd-${borderColor}`, `bd-${borderStyle}`, `bd-${borderWidth}`, 'no-bd-top-right')}
+            <div vocab="https://schema.org/" typeof="Table" className={style('table', `bg-${bgColor}`, `bd-${borderColor}`, `bd-${borderStyle}`, `bd-${borderWidth}`, 'no-bd-top-right')}
                 style={{gridTemplateRows: `repeat(${linesNr}, 1fr)`, gridTemplateColumns: `repeat(${columsNr}, 1fr)`}}
             >
+                <span className={style('hidden')} property="dateCreated">{new Date().getFullYear() + '/' + new Date().getMonth() + '/' + new Date().getDay()}</span>
+                <span className={style('hidden')} property="size">{linesNr * columsNr}</span>
+                <span className={style('hidden')} property="image">{'https://1.bp.blogspot.com/-Z3gIwonB54A/WtOcwFhYxII/AAAAAAAAARE/cIRGmSVZ_HAuuJttImPoi8jRZOVJ3MjWACLcBGAs/s640/firstrow-firstcolumn.png'}</span>
                 {
                     [...Array(linesNr)].map((e, i) => (
                         [...Array(columsNr)].map((e, j) => {
@@ -91,7 +97,6 @@ export const buildTable = (section: TableStructure) => {
 }
 
 const componentPicker = (element: GenericComponent, i: number): JSX.Element => {
-    console.log('picker element:', element)
     if(element[ComponentNameEnum.AUDIO]) return componentGenerator.buildAudio(element.audio as AudioComponent, i);
     if(element[ComponentNameEnum.BUTTON]) return componentGenerator.buildButton(element.button as ButtonComponent, i);
     if(element[ComponentNameEnum.CALENDAR]) return componentGenerator.buildCalendar(element.calendar as CalendarComponent, i);
