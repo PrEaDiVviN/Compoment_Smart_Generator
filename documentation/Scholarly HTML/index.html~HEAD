@@ -69,8 +69,8 @@
             <br><br>
             Initially the project was to be realized as a browser application containing 2 pages. The first one was an form page where the user will learn about the language 
             and possible language constructs and where they will be able to introduce the desired text to get the page design. And second page will be the result of submitting text 
-            on the first page. If the data introduced is valid, the user will be redirected to the generated page and if not then an error message will be shown. As a conclusion, 
-            the main functionality is related to the posibility of the user to construct pages using language constructs as similar as possible to the natural language.
+            on the first page. If the data introduced is valid or an error message if not. As a conclusion, the main functionality is related to the ability of the user to construct pages
+            using as natural as possible language constructs.
             <br><br>
             For the initial components the design was made as a template for future references and here are some examples: <br><br>
             <ol style="list-style-type: decimal;">
@@ -1034,61 +1034,6 @@
                 <li property="schema:citation" typeof="schema:WebSite" resource="https://developer.mozilla.org/en-US/">
                     <cite property="schema:name">
                         <a href="https://developer.mozilla.org/en-US/">MDN Web Docs</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://reactjs.org/docs/getting-started.html">
-                    <cite property="schema:name">
-                        <a href="https://reactjs.org/docs/getting-started.html">ReactJS docs</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://schema.org/">
-                    <cite property="schema:name">
-                        <a href="https://schema.org/">Schema.org</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://tailwindcss.com/docs/utility-first">
-                    <cite property="schema:name">
-                        <a href="https://tailwindcss.com/docs/utility-first">tailwindcss</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://web.dev/read-files/">
-                    <cite property="schema:name">
-                        <a href="https://web.dev/read-files/">web.dev</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://stackabuse.com/storing-to-localstorage-in-react/">
-                    <cite property="schema:name">
-                        <a href="https://stackabuse.com/storing-to-localstorage-in-react/">StackAbuse</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.geeksforgeeks.org/how-to-insert-spaces-tabs-in-text-using-html-css/">
-                    <cite property="schema:name">
-                        <a href="https://www.geeksforgeeks.org/how-to-insert-spaces-tabs-in-text-using-html-css/">geeksforgeeks</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.python.org/doc/">
-                    <cite property="schema:name">
-                        <a href="https://www.python.org/doc/">python docs</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://stackoverflow.com/questions/50694881/how-to-download-file-in-react-js">
-                    <cite property="schema:name">
-                        <a href="https://stackoverflow.com/questions/50694881/how-to-download-file-in-react-js">stackoverflow</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="http://webdam.inria.fr/Jorge/html/wdmch9.html">
-                    <cite property="schema:name">
-                        <a href="http://webdam.inria.fr/Jorge/html/wdmch9.html">Webdam Project</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://scialert.net/fulltext/?doi=itj.2010.67.78">
-                    <cite property="schema:name">
-                        <a href="https://scialert.net/fulltext/?doi=itj.2010.67.78">Science Alert</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://foodon.org/reuse-project/reuse-technical/query-with-sparql/">
-                    <cite property="schema:name">
-                        <a href="https://foodon.org/reuse-project/reuse-technical/query-with-sparql/">FoodOn</a>
                     </cite>
                 </li>
             </ul>
